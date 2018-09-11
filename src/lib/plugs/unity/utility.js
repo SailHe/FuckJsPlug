@@ -503,7 +503,8 @@ $.fn.iterateTableCol = function (colNum, iteratorFun) {
     if (this.length > 1) {
         throw new Error("暂不支持多元素操作!!!");
     }
-    for (let i = 0; i < currentTable.rows.length; ++i) {
+    const len = currentTable.rows.length;
+    for (let i = 0; i < len; ++i) {
         iteratorFun($(currentTable.rows[i].cells[colNum]), $(currentTable.rows[i]));
     }
     return this;
@@ -584,7 +585,7 @@ $.fn.tableRowDeleteLineRemove = function () {
  * @author SailHe
  * @date 2018/9/11 16:50
  */
-const identification = (tipStr = '__') =>{
+const identification = (tipStr = '__') => {
     //1ms后将会调用执行remind()函数 (保证ID的差异性)
     return tipStr + setTimeout(() => new Date().getTime(), 1);
 }
@@ -1016,5 +1017,15 @@ $('input[id=searchText]').on('keypress', function (event) {
         //提交搜索时使用ajax->阻止表单的默认行为
         event.preventDefault();
         $('button[id=searchButton]').trigger('click');
+    }
+});
+
+//键盘事件监听
+$('.searcher').on('keypress', function (event) {
+    //enter事件
+    if (event.keyCode == "13") {
+        //提交搜索时使用ajax->阻止表单的默认行为
+        event.preventDefault();
+        $(this).trigger('searchUtility');
     }
 });
