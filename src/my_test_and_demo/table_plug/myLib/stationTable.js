@@ -310,7 +310,7 @@ const tableColSort = (colIndex, isSortAsc) => {
             let rhsValue = $rhsRow.find('td')[colIndex].textContent;
             let rhsValueNum = parseFloat(rhsValue);
             return (isNaN(lhsValueNum) || isNaN(rhsValueNum))
-                ? (lhsValue.localeCompare(lhsValue, 'zh'))
+                ? (isSortAsc ? (lhsValue.localeCompare(rhsValue, 'zh')) : (rhsValue.localeCompare(lhsValue, 'zh')))
                 : (isSortAsc ? (lhsValueNum - rhsValueNum) : (rhsValueNum - lhsValueNum));
         }
     );
@@ -374,7 +374,7 @@ $('.sortable-col').on('click', function () {
         }
     }
     if (colIndex > 0) {
-        //$.messageBox(`按照第${colIndex}列<排序`);
+        //$.messageBox(`按照第${colIndex}列排序`);
         tableColSort(colIndex, sortAsc);
     }
 });
