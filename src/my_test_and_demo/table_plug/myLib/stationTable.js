@@ -84,11 +84,11 @@ $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
     return;
   }
 
-  var stationGoodsId = stationGoodsDto.stationPriceId == null ? 0 : stationGoodsDto.stationPriceId;
+  const stationGoodsId = stationGoodsDto.stationPriceId == null ? 0 : stationGoodsDto.stationPriceId;
 
-  var data = "<tr role='row'>" +
+  const data = "<tr role='row'>" +
     "<td><div style='text-align: center'><input style='padding:0 10px;' type='checkbox' name='stationGoodsCheckbox' value='" + stationGoodsDto.stationId + "'></div></td>" +
-    "<td><div style='text-align: center'>" + name + "</div></td>" +
+    "<td><div style='text-align: center'>" + "<label for='tab-1' class='tab clickable'>" + name + "</label>" + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceFactoryPrice'>" + stationGoodsDto.stationPriceFactoryPrice + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceSalesPrice'>" + stationGoodsDto.stationPriceSalesPrice + "</div></td>" +
     "<td style='display:none;'><div style='text-align: center;'><input class='stationGoodsId' value='" + stationGoodsId + "'></div></td>" +
@@ -103,10 +103,10 @@ $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
  * @date 2018/5/28 19:14
  */
 $.fn.setRelatedStationGoods = function () {
-  var stationIdListBuffer = this.getTableColValue(0);
-  var stationGoodsIdListBuffer = this.getTableColValue(4);
-  var factoryPricePriceListBuffer = this.getTableColValue(2);
-  var salesPriceListBuffer = this.getTableColValue(3);
+  const stationIdListBuffer = this.getTableColValue(0);
+  const stationGoodsIdListBuffer = this.getTableColValue(4);
+  const factoryPricePriceListBuffer = this.getTableColValue(2);
+  const salesPriceListBuffer = this.getTableColValue(3);
   $("input[name='stationGoodsIdList']").val(stationGoodsIdListBuffer);
   $("input[name='stationIdList']").val(stationIdListBuffer);
   $("input[name='factoryPriceList']").val(factoryPricePriceListBuffer);
@@ -293,3 +293,35 @@ $('#allStationCheckBox').on('click', function () {
     this.textContent = '取消当前';
   }
 });
+
+
+
+
+const $tableBodyStorehouse = $('#stationGoodsStorehouse');
+
+$('.btn-sort').on('click', () => {
+  const colIndex = 3;
+  let tableBodyAllElement = new Array();
+  $tableBodyStorehouse.getTableColValue(colIndex, ($cell, $row) => {
+    $.messageBox($cell.text());
+    tableBodyAllElement.push($row);
+  });
+  $tableBodyStorehouse.emptyStorehouse();
+  tableBodyAllElement.sort(
+    ($lhsRow, $rhsRow) => parseInt($lhsRow.find('td')[colIndex].textContent) - $rhsRow.find('td')[colIndex].textContent
+  );
+  tableBodyAllElement.forEach($value => {
+    let temp = new StationPriceDTO();
+    temp.stationId =  $($value.find('td')[0]).find('input').val();
+    temp.stationPriceFactoryPrice =  $value.find('td')[2].textContent;
+    temp.stationPriceSalesPrice =  $value.find('td')[3].textContent;
+    $tableBodyStorehouse.addOrUpdateStationGoodsTableRow(
+      $value.find('td')[1].textContent, temp);
+  });
+  $.messageBox("排序完成", 'alert');
+});
+
+//排序
+$.fn.sortCol = () => {
+
+}
