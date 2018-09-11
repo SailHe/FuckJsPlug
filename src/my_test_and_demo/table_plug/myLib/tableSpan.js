@@ -2,7 +2,7 @@
  * Descriptions: 合并指定行<p>
  *
  * @param 无需合并的行
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/18 21:09
  */
 function rowspanAssign($api, unMergeRowIdArray) {
@@ -69,7 +69,7 @@ function rowspanAssign($api, unMergeRowIdArray) {
  * Descriptions: 重复行合并, 将指定列下 所有相邻且具有相同[非空]文本的 单元行合并为一个单元行<p>
  *
  * @param colIdx: 含有重复元素的列(从0开始)
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/19 19:08
  */
 jQuery.fn.rowspanRepeatedly = function (colIdx) {

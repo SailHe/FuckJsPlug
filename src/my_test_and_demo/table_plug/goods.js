@@ -32,7 +32,7 @@ $(document).ready(function (data) {
  * Descriptions: 二级联动<p>
  *     找到左侧select框选中的元素 将右侧select框中与左侧选中元素无关的元素隐藏 并选中 空
  *
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/22 13:59
  */
 function secondaryLinkage(lhsSelectDom, rhsSelectDom, categoryGradeIndex) {

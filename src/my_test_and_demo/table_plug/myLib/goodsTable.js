@@ -12,7 +12,7 @@ var showCopies = false;
 /**
  * Descriptions: 为table弹框添加一行若number为undefine则不会添加数字列<p>
  * eg: $("#storehouse").addTableRow
- * @author 何帆
+ * @author SailHe
  * @date 2018/5/7 17:26
  */
 $.fn.addTableRow = function (ID, name, number) {
@@ -68,7 +68,7 @@ $.addSelectGoods = function () {
 /**
  * Descriptions: 商品列表设置<p>
  *
- * @author 何帆
+ * @author SailHe
  * @date 2018/5/10 12:56
  */
 $.setRelatedGoods = function () {

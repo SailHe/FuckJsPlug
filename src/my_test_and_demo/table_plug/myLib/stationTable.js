@@ -20,7 +20,7 @@ function StationPriceDTO() {
 /**
  * Descriptions: 为table弹框添加一行若<p>
  * eg: $("#storehouse").addTableRow
- * @author 何帆
+ * @author SailHe
  * @date 2018/5/28 19:14
  */
 $.fn.addStationTableRow = function (stationId, stationName) {
@@ -38,7 +38,7 @@ $.fn.addStationTableRow = function (stationId, stationName) {
 /**
  * Descriptions: 为table弹框添加一行<p>
  * eg: $("#storehouse").addTableRow
- * @author 何帆
+ * @author SailHe
  * @date 2018/5/28 19:14
  */
 $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
@@ -86,9 +86,11 @@ $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
 
   const stationGoodsId = stationGoodsDto.stationPriceId == null ? 0 : stationGoodsDto.stationPriceId;
 
+  const currentId = identification(`__tableRowCheckBox${name}`);
+
   const data = "<tr role='row'>" +
-    "<td><div style='text-align: center'><input style='padding:0 10px;' type='checkbox' name='stationGoodsCheckbox' value='" + stationGoodsDto.stationId + "'></div></td>" +
-    "<td><div style='text-align: center'>" + "<label for='tab-1' class='tab clickable'>" + name + "</label>" + "</div></td>" +
+    "<td><div style='text-align: center'><input style='padding:0 10px;' type='checkbox' id='" + currentId + "' name='stationGoodsCheckbox' value='" + stationGoodsDto.stationId + "'></div></td>" +
+    "<td><div style='text-align: center'>" + "<label for='" + currentId +"' class='clickable'>" + name + "</label>" + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceFactoryPrice'>" + stationGoodsDto.stationPriceFactoryPrice + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceSalesPrice'>" + stationGoodsDto.stationPriceSalesPrice + "</div></td>" +
     "<td style='display:none;'><div style='text-align: center;'><input class='stationGoodsId' value='" + stationGoodsId + "'></div></td>" +
@@ -99,7 +101,7 @@ $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
 /**
  * Descriptions: 商品列表设置<p>
  *
- * @author 何帆
+ * @author SailHe
  * @date 2018/5/28 19:14
  */
 $.fn.setRelatedStationGoods = function () {

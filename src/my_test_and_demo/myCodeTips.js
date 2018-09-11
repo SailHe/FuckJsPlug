@@ -157,7 +157,7 @@ var str = JSON.stringify(jsonData);
 /**
  * Descriptions: Size类函数原型<p>
  * //@TODO undefined比较bug
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/16 14:46
  */
 function Size() {
@@ -197,7 +197,7 @@ function Size() {
  * Descriptions: 树状表格函数原型<p>
  * @param treeList 树状列表, 是一个二维数组 第一维代表层数 第二维代表具体结点
  * @param nodeName 结点的名称
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/16 18:35
  */
 function TreeViewerTable() {
@@ -300,7 +300,7 @@ function requestTreeViewerNode(categoryGradeName, treeTable) {
 /**
  * Descriptions: 为带有焦点style的输入框添加焦点提示<p>
  *
- * @author 何帆
+ * @author SailHe
  * @date 2018/4/14 12:56
  */
 $(".focus-prompts").attr({

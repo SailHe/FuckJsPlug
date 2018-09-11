@@ -8,7 +8,7 @@ $(() => {
  * 可以包含数字 [0-9]
  * 可以包含下划线 [ _ ] 和减号 [ - ]<p>
  *
- * @author 何帆
+ * @author SailHe
  * @date 2018/9/10 20:39
  */
 const PATTERN_PASSWORD = /^[\w_-]{6,16}$/;
