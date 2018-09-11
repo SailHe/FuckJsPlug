@@ -3,9 +3,9 @@
  * */
 
 //查重用
-var duplicateBuffer = {};
+let duplicateBuffer = {};
 
-var stationIdNameMap = new Map();
+const stationIdNameMap = new Map();
 
 function StationPriceDTO() {
     this.stationPriceId = null;//Long id -->stationPriceId;
@@ -399,4 +399,8 @@ $('#stationInfoModal').on('keypress', function (event) {
         event.preventDefault();
         $('#stationSubmitButton').trigger('click');
     }
+});
+
+$('.btn-untitled').on('click', function () {
+    $.messageBox("这是一个" + $(this).text());
 });
