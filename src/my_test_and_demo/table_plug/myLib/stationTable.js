@@ -295,7 +295,7 @@ $('.all-check-btn').on('click', function () {
 
 const $tableBodyStorehouse = $('#stationGoodsStorehouse');
 
-const tableColSort = (colIndex) => {
+const tableColSort = (colIndex, isSortAsc) => {
     if (isValidVar(colIndex) && typeof colIndex !== 'number') {
         throw new Error("参数非法!!!");
     }
@@ -306,10 +306,12 @@ const tableColSort = (colIndex) => {
     tableBodyAllElement.sort(
         ($lhsRow, $rhsRow) => {
             let lhsValue = $lhsRow.find('td')[colIndex].textContent;
-            let lhsValueNum = parseInt(lhsValue);
+            let lhsValueNum = parseFloat(lhsValue);
             let rhsValue = $rhsRow.find('td')[colIndex].textContent;
-            let rhsValueNum = parseInt(rhsValue);
-            return (isNaN(lhsValueNum) || isNaN(rhsValueNum)) ? (lhsValue.localeCompare(lhsValue, 'zh')) : (lhsValueNum - rhsValueNum);
+            let rhsValueNum = parseFloat(rhsValue);
+            return (isNaN(lhsValueNum) || isNaN(rhsValueNum))
+                ? (lhsValue.localeCompare(lhsValue, 'zh'))
+                : (isSortAsc ? (lhsValueNum - rhsValueNum) : (rhsValueNum - lhsValueNum));
         }
     );
     tableBodyAllElement.forEach($value => {
@@ -320,7 +322,7 @@ const tableColSort = (colIndex) => {
         $tableBodyStorehouse.addOrUpdateStationGoodsTableRow(
             $value.find('td')[1].textContent, temp);
     });
-    $.messageBox("排序完成", 'alert_');
+    //$.messageBox("排序完成", 'alert_');
 }
 
 /**
@@ -347,12 +349,33 @@ $.fn.getColIndex = function (cellTag) {
     return index >= len ? -1 : index;
 }
 
+$.fn.replaceClass = function (oldClassName, newClassName) {
+    this.removeClass(oldClassName);
+    this.addClass(newClassName);
+    return this;
+}
+
 //排序
 $('.sortable-col').on('click', function () {
     const colIndex = $(this).getColIndex('th');
+    let sortAsc = true;
+    const $currentBtn = $(this);
+    if (isValidVar($currentBtn.hasClass('sorting-both'))) {
+        $('.sortable-col').removeClass('sorting-desc').removeClass('sorting-asc').addClass('sorting-both');
+        $currentBtn.replaceClass('sorting-both', 'sorting-asc');
+    } else {
+        if (isValidVar($currentBtn.hasClass('sorting-asc'))) {
+            $('.sortable-col').removeClass('sorting-desc').removeClass('sorting-asc').addClass('sorting-both');
+            $currentBtn.replaceClass('sorting-both', 'sorting-desc');
+            sortAsc = false;
+        } else {
+            $('.sortable-col').removeClass('sorting-desc').removeClass('sorting-asc').addClass('sorting-both');
+            $currentBtn.replaceClass('sorting-both', 'sorting-asc');
+        }
+    }
     if (colIndex > 0) {
-        $.messageBox(`按照第${colIndex}列<排序`);
-        tableColSort(colIndex);
+        //$.messageBox(`按照第${colIndex}列<排序`);
+        tableColSort(colIndex, sortAsc);
     }
 });
 
@@ -366,4 +389,14 @@ $('.searcher').on('searchUtility', function () {
         }
     });
     $('.deleter').deleteTableRow();
+});
+
+//键盘事件监听
+$('#stationInfoModal').on('keypress', function (event) {
+    //enter事件
+    if (event.keyCode == "13") {
+        //提交搜索时使用ajax->阻止表单的默认行为
+        event.preventDefault();
+        $('#stationSubmitButton').trigger('click');
+    }
 });
