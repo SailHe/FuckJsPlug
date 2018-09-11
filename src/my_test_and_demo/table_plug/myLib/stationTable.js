@@ -273,29 +273,25 @@ $('#stationSubmitButton').on('click', function () {
   }
 });
 
-//全选按钮
-$('#allStationGoodsCheckBox').on('click', function () {
-  //this 是个Dom
-  if (this.textContent == '取消当前') {
-    $("input[name='stationGoodsCheckbox']").attr("checked", false);
-    this.textContent = '全选当前';
+//全选按钮 jquery > 1.6
+$('.all-check-btn').on('click', function () {
+  let $currentBtn = $(this);
+  const $currentTableBody = $currentBtn.closest('table').find('tbody');
+  const colIndex = $currentBtn.getColIndex('th');
+  if (isValidVar($currentBtn.prop('allCheck'))) {
+    //取消全选 遍历
+    $currentTableBody.iterateTableCol(colIndex, ($cell) => {
+      $cell.find('input').prop("checked", false);
+    });
+    $currentBtn.prop('allCheck', null);
   } else {
-    $("input[name='stationGoodsCheckbox']").attr("checked", true);
-    this.textContent = '取消当前';
+    //全选
+    $currentTableBody.iterateTableCol(colIndex, ($cell) => {
+      $cell.find('input').prop("checked", true);
+    });
+    $currentBtn.prop('allCheck', true);
   }
 });
-
-$('#allStationCheckBox').on('click', function () {
-  //this 是个Dom
-  if (this.textContent == '取消当前') {
-    $("input[name='stationCheckbox']").attr("checked", false);
-    this.textContent = '全选当前';
-  } else {
-    $("input[name='stationCheckbox']").attr("checked", true);
-    this.textContent = '取消当前';
-  }
-});
-
 
 const $tableBodyStorehouse = $('#stationGoodsStorehouse');
 
@@ -315,7 +311,7 @@ const tableColSort = (colIndex) => {
       let lhsValueNum = parseInt(lhsValue);
       let rhsValue = $rhsRow.find('td')[colIndex].textContent;
       let rhsValueNum = parseInt(rhsValue);
-      return (isNaN(lhsValueNum) || isNaN(rhsValueNum)) ? (lhsValue.localeCompare(lhsValue, 'zh')) :  (lhsValueNum - rhsValueNum);
+      return (isNaN(lhsValueNum) || isNaN(rhsValueNum)) ? (lhsValue.localeCompare(lhsValue, 'zh')) : (lhsValueNum - rhsValueNum);
     }
   );
   tableBodyAllElement.forEach($value => {
@@ -329,18 +325,35 @@ const tableColSort = (colIndex) => {
   $.messageBox("排序完成", 'alert_');
 }
 
-//排序
-$('.sortable-col').on('click', function () {
-  let $row = $(this).closest('tr');
-  let index = 0;
-  let $allTh = $row.find('th');
-  let len = $allTh.length;
+/**
+ * Descriptions: 返回此cell在表格中的index 若失败返回-1<p>
+ *
+ * @author SailHe
+ * @date 2018/9/11 18:06
+ */
+$.fn.getColIndex = function (cellTag) {
+  let $row = this.closest('tr');
+  if (this.length > 1) {
+    throw new Error("此方法暂不支持多元素操作!");
+  }
+  let $currentCol = this[0];
+  let index = -1;
+  let $allCol = $row.find(cellTag);
+  let len = $allCol.length;
   while (index < len) {
-    if ($allTh[index] === this) {
-      $.messageBox(`按照第${index}列<排序`);
-      tableColSort(index);
+    ++index;
+    if ($allCol[index] === $currentCol) {
       break;
     }
-    ++index;
+  }
+  return index >= len ? -1 : index;
+}
+
+//排序
+$('.sortable-col').on('click', function () {
+  const colIndex = $(this).getColIndex('th');
+  if (colIndex > 0) {
+    $.messageBox(`按照第${colIndex}列<排序`);
+    tableColSort(colIndex);
   }
 });

@@ -487,6 +487,29 @@ $.fn.deleteTableRow = function () {
 }
 
 /**
+ * Descriptions: 遍历指定table的指定列
+ * 注意: 参数未经任何处理
+ * @param colNum 列号
+ * @param iteratorFun($cell, $row)
+ * @author SailHe
+ * @return $(this)
+ * @date 2018/9/11 18:30
+ */
+$.fn.iterateTableCol = function (colNum, iteratorFun) {
+    const currentTable = this.get(0);
+    if (!isValidVar(iteratorFun)) {
+        throw new Error("必须定义迭代方法!!!");
+    }
+    if (this.length > 1) {
+        throw new Error("暂不支持多元素操作!!!");
+    }
+    for (let i = 0; i < currentTable.rows.length; ++i) {
+        iteratorFun($(currentTable.rows[i].cells[colNum]), $(currentTable.rows[i]));
+    }
+    return this;
+}
+
+/**
  * Descriptions: 获取指定table指定列的值
  * 注意: 若内部有input的话 该值仅仅与第一个input的value有关; img会返回src而不是value
  * @param colNum 列号

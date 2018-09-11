@@ -29,9 +29,6 @@
         <button type="button" class="btn btn-default audit-need" id="stationGoodsDeleteButton">
           删除价格
         </button>
-        <button type="button" class="btn btn-default" id="allStationGoodsCheckBox">
-          全选当前
-        </button>
       </div>
     </div>
     <div>
@@ -45,7 +42,7 @@
         <!--页标题-->
         <thead>
         <tr>
-          <th style='text-align: center'>多选</th>
+          <th style='text-align: center' class='all-check-btn clickable'>多选</th>
           <th style='text-align: center' class='sortable-col clickable'>奶站名称</th>
           <th style='text-align: center' class='sortable-col clickable'>出厂价</th>
           <th style='text-align: center' class='sortable-col clickable'>售价</th>
@@ -105,18 +102,12 @@
           <label class="col-md-2 control-label"></label>
           <!--display:inline-block-->
           <div id="relatedGoodsToStation" class="border-box col-md-8 collapse in ">
-            <!--<div>
-                <select class="form-control" id="queryGoodsList"></select>
-            </div>-->
-            <button type="button" class="btn btn-default" id="allStationCheckBox">
-              全选当前
-            </button>
             <div class="auto-scroll">
               <table class="table table-striped table-condensed table-bordered">
                 <!--页标题-->
                 <thead>
                 <tr>
-                  <th style='text-align: center'>多选</th>
+                  <th style='text-align: center' class='all-check-btn clickable'>多选</th>
                   <th style='text-align: center'>奶站名称</th>
                 </tr>
                 </thead>
