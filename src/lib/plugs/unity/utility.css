@@ -101,7 +101,7 @@ http://www.w3school.com.cn/cssref/pr_class_float.asp
     display: none;
 }
 
-.goodsSuggestModalTable-nva{
+.goodsSuggestModalTable-nva {
     margin-top: 3px;
     margin-left: 3px;
 }
@@ -119,12 +119,15 @@ http://www.w3school.com.cn/cssref/pr_class_float.asp
     color: #126AC1;
 }
 
-
 /**************************login-add**********************/
 .clickable {
-  padding:0 5px;
-  color:#1890FF;
-  /*color: #00CCFF;*//*淡色表示选中的*/
-  cursor: pointer;
+    padding: 0 5px;
+    /*color: #1890FF;*/
+    cursor: pointer;
+}
+
+th.clickable:hover {
+    /*padding:0 5px;*/ /*凹陷*/
+    color: #00CCFF;
 }
 

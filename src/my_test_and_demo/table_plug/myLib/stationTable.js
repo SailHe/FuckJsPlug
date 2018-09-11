@@ -90,7 +90,7 @@ $.fn.addOrUpdateStationGoodsTableRow = function (name, stationGoodsDto) {
 
   const data = "<tr role='row'>" +
     "<td><div style='text-align: center'><input style='padding:0 10px;' type='checkbox' id='" + currentId + "' name='stationGoodsCheckbox' value='" + stationGoodsDto.stationId + "'></div></td>" +
-    "<td><div style='text-align: center'>" + "<label for='" + currentId +"' class='clickable'>" + name + "</label>" + "</div></td>" +
+    "<td><div style='text-align: center'>" + "<label for='" + currentId + "' class='clickable'>" + name + "</label>" + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceFactoryPrice'>" + stationGoodsDto.stationPriceFactoryPrice + "</div></td>" +
     "<td><div style='text-align: center' class='stationPriceSalesPrice'>" + stationGoodsDto.stationPriceSalesPrice + "</div></td>" +
     "<td style='display:none;'><div style='text-align: center;'><input class='stationGoodsId' value='" + stationGoodsId + "'></div></td>" +
@@ -297,12 +297,12 @@ $('#allStationCheckBox').on('click', function () {
 });
 
 
-
-
 const $tableBodyStorehouse = $('#stationGoodsStorehouse');
 
-$('.btn-sort').on('click', () => {
-  const colIndex = 3;
+const tableColSort = (colIndex) => {
+  if (isValidVar(colIndex) && typeof colIndex !== 'number') {
+    throw new Error("参数非法!!!");
+  }
   let tableBodyAllElement = new Array();
   $tableBodyStorehouse.getTableColValue(colIndex, ($cell, $row) => {
     $.messageBox($cell.text());
@@ -310,20 +310,37 @@ $('.btn-sort').on('click', () => {
   });
   $tableBodyStorehouse.emptyStorehouse();
   tableBodyAllElement.sort(
-    ($lhsRow, $rhsRow) => parseInt($lhsRow.find('td')[colIndex].textContent) - $rhsRow.find('td')[colIndex].textContent
+    ($lhsRow, $rhsRow) => {
+      let lhsValue = $lhsRow.find('td')[colIndex].textContent;
+      let lhsValueNum = parseInt(lhsValue);
+      let rhsValue = $rhsRow.find('td')[colIndex].textContent;
+      let rhsValueNum = parseInt(rhsValue);
+      return (isNaN(lhsValueNum) || isNaN(rhsValueNum)) ? (lhsValue.localeCompare(lhsValue, 'zh')) :  (lhsValueNum - rhsValueNum);
+    }
   );
   tableBodyAllElement.forEach($value => {
     let temp = new StationPriceDTO();
-    temp.stationId =  $($value.find('td')[0]).find('input').val();
-    temp.stationPriceFactoryPrice =  $value.find('td')[2].textContent;
-    temp.stationPriceSalesPrice =  $value.find('td')[3].textContent;
+    temp.stationId = $($value.find('td')[0]).find('input').val();
+    temp.stationPriceFactoryPrice = $value.find('td')[2].textContent;
+    temp.stationPriceSalesPrice = $value.find('td')[3].textContent;
     $tableBodyStorehouse.addOrUpdateStationGoodsTableRow(
       $value.find('td')[1].textContent, temp);
   });
-  $.messageBox("排序完成", 'alert');
-});
+  $.messageBox("排序完成", 'alert_');
+}
 
 //排序
-$.fn.sortCol = () => {
-
-}
+$('.sortable-col').on('click', function () {
+  let $row = $(this).closest('tr');
+  let index = 0;
+  let $allTh = $row.find('th');
+  let len = $allTh.length;
+  while (index < len) {
+    if ($allTh[index] === this) {
+      $.messageBox(`按照第${index}列<排序`);
+      tableColSort(index);
+      break;
+    }
+    ++index;
+  }
+});
