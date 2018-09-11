@@ -360,9 +360,10 @@ $('.searcher').on('searchUtility', function () {
     let searchText = this.value;
     $tableBodyStorehouse.iterateTableCol(0, ($cell, $row) => {
         if ($row.text().indexOf(searchText) < 0) {
-            $row.prop('class', 'pre-deleter');
-            duplicateBuffer[$cell.find('input').val()] = false;
+            $row.prop('class', 'deleter');
+            //不能置为 false
+            duplicateBuffer[$cell.find('input').val()] = undefined;
         }
     });
-    $('.pre-deleter').deleteTableRow();
+    $('.deleter').deleteTableRow();
 });

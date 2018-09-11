@@ -96,7 +96,8 @@ $('#stationInfoModal').modal({
   //貌似这个无关紧要
   stationGoodsDTO.goodsSkuId = $($('input[name=goodsSkuId]')).val();
   var $stationGoodsStorehouse = $("#stationGoodsStorehouse");
-  for (var i = 0; i < stationIdList.length; ++i) {
+  const len = stationIdList.length;
+  for (var i = 0; i < len; ++i) {
     stationGoodsDTO.stationId = parseInt(stationIdList[i]);
     $stationGoodsStorehouse.addOrUpdateStationGoodsTableRow(stationIdNameMap.get(stationGoodsDTO.stationId), stationGoodsDTO);
   }
