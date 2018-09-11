@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+
+    <!--
+    bootstrap-datepicker->增强改进分支: datetimepicker
+    jQueryUI-datepicker->插件: timepicker
+    区别参见 https://blog.csdn.net/u011623918/article/details/49633733
+    本例来源: http://www.cnblogs.com/linJie1930906722/p/6066071.html
+    -->
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!--jquery UI v1.11.4版本不行-->
+    <link href="../../plugins/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+    <script src="../../plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <!--CDNJS介绍: https://blog.csdn.net/qqduxingzhe/article/details/72677718-->
+    <!--jQueryUI-timepicker参见 https://cdnjs.com/libraries/jquery-ui-timepicker-addon-->
+    <!--下载: http://trentrichardson.com/examples/timepicker/     GitHub: https://github.com/trentrichardson/jQuery-Timepicker-Addon-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.js"></script>
+    <!--时间中文-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-CN.js"></script>
+
+    <script type="text/javascript">
+        (function ($) {
+
+            //日期中文
+            $(function () {
+                $.datepicker.regional['zh-CN'] = {
+                    changeMonth: true,
+                    changeYear: true,
+                    clearText: '清除',
+                    clearStatus: '清除已选日期',
+                    closeText: '关闭',
+                    closeStatus: '不改变当前选择',
+                    prevText: '<上月',
+                    prevStatus: '显示上月',
+                    prevBigText: '<<',
+                    prevBigStatus: '显示上一年',
+                    nextText: '下月>',
+                    nextStatus: '显示下月',
+                    nextBigText: '>>',
+                    nextBigStatus: '显示下一年',
+                    currentText: '今天',
+                    currentStatus: '显示本月',
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                    monthStatus: '选择月份',
+                    yearStatus: '选择年份',
+                    weekHeader: '周',
+                    weekStatus: '年内周次',
+                    dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                    dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                    dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                    dayStatus: '设置 DD 为一周起始',
+                    dateStatus: '选择 m月 d日, DD',
+                    dateFormat: 'yy-mm-dd',
+                    firstDay: 1,
+                    initStatus: '请选择日期',
+                    isRTL: false
+                };
+
+            });
+
+            $(function () {
+
+                $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+
+                $("#default").datetimepicker();
+
+                /*
+                http://www.runoob.com/jquery/html-prop.html
+                prop() 方法设置或返回被选元素的属性和值。
+                当该方法用于返回属性值时，则返回第一个匹配元素的值。
+                当该方法用于设置属性值时，则为匹配元素集合设置一个或多个属性/值对。
+                注意：prop() 方法应该用于检索属性值，例如 DOM 属性（如 selectedIndex, tagName, nodeName, nodeType, ownerDocument, defaultChecked, 和 defaultSelected）。
+                提示：如需检索 HTML 属性，请使用 attr() 方法代替。
+                提示：如需移除属性，请使用 removeProp() 方法。
+                */
+                //控制到时分秒
+                $('#date').prop("readonly", true).datetimepicker({
+                    timeText: '时间',
+                    hourText: '小时',
+                    minuteText: '分钟',
+                    secondText: '秒',
+                    currentText: '现在',
+                    closeText: '完成',
+                    showSecond: true, //显示秒
+                    timeFormat: 'HH:mm:ss' //格式化时间
+                });
+
+                $("#date_yy-mm-dd").prop("readonly", true).datepicker({
+                    changeMonth: true,
+                    dateFormat: "yy-mm-dd",
+                    duration: 'slow',
+                    defaultDate: +7, //还可以是时间字符串，当前日期对应的时间数值
+                    onClose: function (selectedDate) {
+
+                    }
+                });
+
+                /* http://trentrichardson.com/examples/timepicker/ */
+                $("#date_start").prop("readonly", true).datepicker({
+                    changeMonth: true,
+                    dateFormat: "yy-mm-dd",
+                    onClose: function (selectedDate) {
+                        $("#date_end").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $("#date_end").prop("readonly", true).datepicker({
+                    changeMonth: true,
+                    dateFormat: "yy-mm-dd",
+                    onClose: function (selectedDate) {
+                        $("#date_start").datepicker("option", "maxDate", selectedDate);
+                        $("#date_end").val($(this).val());
+                    }
+                });
+
+                $('#date_HHmmss').prop("readonly", true).timepicker({
+                    timeText: '时间',
+                    hourText: '小时',
+                    minuteText: '分钟',
+                    secondText: '秒',
+                    currentText: '现在',
+                    closeText: '完成',
+                    showSecond: true, //显示秒
+                    timeFormat: 'HH:mm:ss' //格式化时间
+                });
+
+                //end需要双击才能才能选择
+                $.timepicker.dateRange(
+                    $("#date_start_1"), $("#date_end_1"), {
+                        minInterval: (1000 * 60 * 60 * 24 * 1), // 区间时间间隔时间
+                        maxInterval: (1000 * 60 * 60 * 24 * 1), // 1 days 区间时间间隔时间
+                        start: {}, // start picker options
+                        end: {} // end picker options});
+                    }
+                );
+
+            });
+
+        }(jQuery));
+    </script>
+</head>
+
+<body>
+
+默认：
+<input id="default"/>
+<br/>
+<br/>
+控制到时分秒：<input id="date"/>
+<br/>
+<br/> 控制到年月日：
+<input id="date_yy-mm-dd",/>
+<br/>
+<br/> 开始结束区间：
+<br/>
+<input id="date_start"/>~<input id="date_end"/>
+<br/>
+<br/> 时分秒选择：
+<br/>
+<input id="date_HHmmss"/>
+<br/>
+<br/> 开始结束区间(第二种写法)：
+<br/>
+<input id="date_start_1"/>~<input id="date_end_1"/>
+
+</body>
+
+</html>

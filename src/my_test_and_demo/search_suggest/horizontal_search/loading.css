@@ -1,0 +1,180 @@
+/*! CSS Used from: Embedded */
+audio {
+    display: inline-block;
+}
+
+body {
+    margin: 0;
+}
+
+/*! CSS Used from: Embedded */
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    position: relative;
+}
+
+.loading {
+    width: 200px;
+    height: 200px;
+    color: #f36;
+    transform-origin: center;
+    font-size: 0;
+    margin: 50px auto;
+    border-radius: 50%;
+}
+
+.loading div {
+    color: #f36;
+    width: 24px;
+    height: 24px;
+    margin-top: 12px;
+    margin-left: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+}
+
+.loading div span {
+    width: 24px;
+    height: 24px;
+    animation: ball-spin 1s infinite ease-in-out;
+    display: block;
+    background-color: currentColor;
+    border: 0 solid currentColor;
+    border-radius: 100%;
+}
+
+.loading div:nth-child(1) {
+    transform: translate(100px, 0px);
+}
+
+.loading div:nth-child(1) > span {
+    animation-delay: -1.0714285714s;
+}
+
+.loading div:nth-child(2) {
+    transform: translate(90.0968867902px, 43.3883739118px);
+}
+
+.loading div:nth-child(2) > span {
+    animation-delay: -1.1428571429s;
+}
+
+.loading div:nth-child(3) {
+    transform: translate(62.3489801859px, 78.1831482468px);
+}
+
+.loading div:nth-child(3) > span {
+    animation-delay: -1.2142857143s;
+}
+
+.loading div:nth-child(4) {
+    transform: translate(22.2520933956px, 97.4927912182px);
+}
+
+.loading div:nth-child(4) > span {
+    animation-delay: -1.2857142857s;
+}
+
+.loading div:nth-child(5) {
+    transform: translate(-22.2520933956px, 97.4927912182px);
+}
+
+.loading div:nth-child(5) > span {
+    animation-delay: -1.3571428571s;
+}
+
+.loading div:nth-child(6) {
+    transform: translate(-62.3489801859px, 78.1831482468px);
+}
+
+.loading div:nth-child(6) > span {
+    animation-delay: -1.4285714286s;
+}
+
+.loading div:nth-child(7) {
+    transform: translate(-90.09688679px, 43.3883739118px);
+}
+
+.loading div:nth-child(7) > span {
+    animation-delay: -1.5s;
+}
+
+.loading div:nth-child(8) {
+    transform: translate(-99.9999999924px, 0.000000001px);
+}
+
+.loading div:nth-child(8) > span {
+    animation-delay: -1.5714285714s;
+}
+
+.loading div:nth-child(9) {
+    transform: translate(-90.0968866482px, -43.3883738896px);
+}
+
+.loading div:nth-child(9) > span {
+    animation-delay: -1.6428571429s;
+}
+
+.loading div:nth-child(10) {
+    transform: translate(-62.3489783022px, -78.1831479152px);
+}
+
+.loading div:nth-child(10) > span {
+    animation-delay: -1.7142857143s;
+}
+
+.loading div:nth-child(11) {
+    transform: translate(-22.2520743968px, -97.4927875004px);
+}
+
+.loading div:nth-child(11) > span {
+    animation-delay: -1.7857142857s;
+}
+
+.loading div:nth-child(12) {
+    transform: translate(22.2522469032px, -97.4927581554px);
+}
+
+.loading div:nth-child(12) > span {
+    animation-delay: -1.8571428571s;
+}
+
+.loading div:nth-child(13) {
+    transform: translate(62.3500128369px, -78.182905459px);
+}
+
+.loading div:nth-child(13) > span {
+    animation-delay: -1.9285714286s;
+}
+
+.loading div:nth-child(14) {
+    transform: translate(90.1028422071px, -43.3868560124px);
+}
+
+.loading div:nth-child(14) > span {
+    animation-delay: -2s;
+}
+
+/*! CSS Used keyframes */
+@keyframes ball-spin {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}

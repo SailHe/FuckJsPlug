@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>级联导航菜单</title>
+    <script type="text/javascript" src="../../../../../Lab205/Ma_Young/src/main/webapp/plugins/jQuery/jquery.min.js"></script>
+    <!--12年 - 18年-->
+    <link href="linkMenuStyle1.css" rel="stylesheet" type="text/css"/>
+    <link href="linkMenuStyle3.css" rel="stylesheet" type="text/css"/>
+    <link href="horizontalSimulation.css" rel="stylesheet" type="text/css"/>
+    <link href="cssSelectorDemo.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+        var showData = [];
+        var valueData = [];
+        showData[0] = [];
+        valueData[0] = [];
+        showData[0][0] = "上海";
+        valueData[0][0] = "0101";
+        showData[0][1] = "北京";
+        valueData[0][1] = "0102";
+        showData[0][2] = "广州";
+        valueData[0][2] = "0103";
+
+        showData[1] = [];
+        valueData[1] = [];
+
+        showData[1][0] = "纽约";
+        valueData[1][0] = "0201";
+        showData[1][1] = "华盛顿";
+        valueData[1][1] = "0202";
+        showData[1][2] = "加州";
+        valueData[1][2] = "0203";
+
+        showData[2] = [];
+        valueData[2] = [];
+
+        showData[2][0] = "伦敦";
+        valueData[2][0] = "0301";
+        showData[2][1] = "利物浦";
+        valueData[2][1] = "0302";
+        showData[2][2] = "伯明翰";
+        valueData[2][2] = "0303";
+
+        function change(target) {
+            var deSelect = document.getElementById("deSelect");
+            deSelect.innerHTML = null;
+            var m = target.selectedIndex;
+            if (m >= 0) {
+                for (var i = 0; i < showData[m].length; i++) {
+                    deSelect.options[i] = new Option(showData[m][i], valueData[m][i]);
+                }
+                deSelect.options[0].selected = true;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+<!--
+<div class="horizontal-discard">012，345。678，901。</div>
+<div class="horizontal-discard">零一二，345。六七八，901。</div>
+-->
+<div id="horizontal-simulation">
+    <ul>
+        <li>012，</li>
+        <li>345。</li>
+        <li>678，</li>
+        <li>901。</li>
+    </ul>
+    <ul>
+        <li>零一二，</li>
+        <li>345。</li>
+        <li>六七八，</li>
+        <li>901。</li>
+    </ul>
+</div>
+换行前<br>换行后
+<div class="menu">
+    <ul id="menu">
+        <li><a href="http://www.baidu.com">Baidu.Com</a></li>
+        <li><a href="http://www.Code52.Net">Code52.Net</a></li>
+        <li><a href="http://www.yahoo.com">Yahoo.Com</a></li>
+        <li><a href="http://www.google.com" class="last">Google.Com</a></li>
+    </ul>
+    <!--<div style="height: 6em;"></div>-->
+    <!--<div style="height: 46px;"></div>-->
+</div>
+换行前<br>换行后
+<div>
+    <ul class="horizontal-test">
+        <li><a href="http://www.baidu.com">Baidu.Com</a></li>
+        <li><a href="http://www.Code52.Net">Code52.Net</a></li>
+        <li><a href="http://www.yahoo.com">Yahoo.Com</a></li>
+        <li><a href="http://www.google.com" class="last">Google.Com</a></li>
+    </ul>
+</div>
+换行前<br>换行后
+<ul class="horizontal-test">
+    <li>商品</li>
+    <li>规格</li>
+    <li>价格</li>
+</ul>
+换行前<br>换行后
+<div>
+    <form id="caseForm">
+        <select id="caSelect" onchange="change(this)">
+            <option value="China">中国</option>
+            <option value="USA">美国</option>
+            <option value="England">英国</option>
+        </select>
+
+        <select id="deSelect">
+            <option value="shanghai">上海</option>
+            <option value="beijing">北京</option>
+            <option value="guangzhou">广州</option>
+        </select>
+    </form>
+</div>
+
+</body>
+</html>

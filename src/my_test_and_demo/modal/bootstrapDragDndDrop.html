@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BootStrap Modal</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<button class="btn btn-default">显示Modal</button>
+
+<div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="//cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script type="text/javascript">
+    var $button = $('.btn-default'), $modal = $('#exampleModal');
+    $(function () {
+        $button.on('click', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            $modal.show(
+                '500',
+                function () {
+                    var modal = $(this);
+                    modal.find('.modal-title').text('可拖拽Modal');
+                    $.ajax({});
+                });
+            /* 完成拖拽 */
+            $modal.draggable({
+                cursor: "move",
+                handle: '.modal-header'
+            });
+            $modal.modal('show');
+        });
+
+        //设置初始化
+        $('#exampleModal').modal({
+            //点击空白处关闭
+            backdrop: 'static',
+            //escape 键退出
+            keyboard: false,
+            focus: true,
+            //初始化后显示与否
+            show: false,
+        })
+            .on('show.bs.modal', function (e) {
+                console.log('显示事件触发');
+            })
+            .on('shown.bs.modal', function () {
+                $('#goodsSearchText').trigger('focus');
+                console.log("显示完成");
+            })
+            //显示
+            //.modal('aop')
+            //触发一下就关闭
+            //.modal('toggle')
+            //.modal('hide')
+            /*.modal('handleUpdate')
+            .modal('dispose')*/
+            .on('hide.bs.modal', function () {
+                console.log('关闭事件触发');
+            })
+            .on('hidden.bs.modal', function () {
+                console.log('已关闭');
+            })
+        ;
+    });
+</script>
+</body>
+</html>

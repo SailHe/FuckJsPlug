@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <title>无限极级联下拉框的封装</title>
+    <script type="text/javascript" src="../../../plugins/jQuery/jquery.min.js"></script>
+    <style>
+        select {
+            margin-left: 10px;
+        }
+
+        body {
+            font-size: 14px;
+            background-color: #CCCCCC;
+        }
+
+        td {
+            border: 1px solid #FF6600;
+            padding: 5px;
+            text-align: left;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        input[type=checkbox] {
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" runat="server">
+    <div>
+        <h1>
+            无限极级联下拉框的封装</h1>
+        <div style="margin: 50px 0 50px 10px;">
+            绑定方法：<select id="selCase">
+            <option value="1">第一种方法</option>
+            <option value="2">第二种方法</option>
+        </select>
+            <input type="button" onclick="test()" value="绑定"/>
+            <div style="margin: 10px;">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            第一个下拉框：
+                        </td>
+                        <td>
+                            <input type="text" id="tb1sel" value="a002"/>设置当前项的选中值
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            第二个下拉框：
+                        </td>
+                        <td>
+                            <input type="text" id="tb2sel" value=""/>设置当前项的选中值
+                        </td>
+                        <td>
+                            <input type="checkbox" id="cb2Remove" value=""/>是否移除第一项
+                        </td>
+                        <td>
+                            <input type="text" id="tb2AllValue" value="0"/>当前一项值等于此值时，该项全选
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            第三个下拉框：
+                        </td>
+                        <td>
+                            <input type="text" id="tb3sel" value=""/>设置当前项的选中值
+                        </td>
+                        <td>
+                            <input type="checkbox" id="cb3Remove"/>是否移除第一项
+                        </td>
+                        <td>
+                            <input type="text" id="tb3AllValue" value=""/>当前一项值等于此值时，该项全选
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <h4>
+            下拉框结果：</h4>
+        <div id="selContainer" style="margin: 0px 0 50px 100px;">
+        </div>
+        <!--<script type="text/javascript" src="/Scripts/Jquery.cascadeDropDown-1.2.js"></script>-->
+        <script type="text/javascript">
+            /*
+* 级联下拉框Jqueyr插件，V1.2
+* Copyright 2011, Leo.Liu
+* 本插件包括2个无刷新级联下拉框插件：
+* 插件一：cascadeDropDownData是在不与服务器进行AJAX交互情况使用，需预先将所有下拉框数据全部读出。demo：
+* 方法一：var dataItem = [['全部', '-1', '0'], ['a001', 'a001', '0'], ['a002', 'a002', '0'], ['a003', 'a003', '0']
+, ['b001', 'b001', 'a001'], ['b002', 'b002', 'a001'], ['b003', 'b003', 'a002'], ['b004', 'b004', 'a003']
+, ['c001', '001', 'b001'], ['c002', '002', 'b001'], ['c003', '003', 'b002'], ['c004', '004', 'b003']];
+$.cascadeDropDownBind.bind(dataItem, { sourceID: 'Select1', selectValue: 'a001', parentValue : '0',
+child: { sourceID: 'Select2', selectValue: 'b002',
+child: { sourceID: 'Select3', selectValue: 'c002'}
+}
+});
+* 此方法有缺陷：a)要求下拉框的值与父子对应中的父值不能相同 b)不能设置全选规则
+*
+* 方法二：var data = [['全部', '0'], ['a001', 'a001'], ['a002', 'a002'], ['a003', 'a003']];
+var data2 = [['全部', '0', '0'], ['b001', 'b001', 'a001'], ['b002', 'b002', 'a001'], ['b003', 'b003', 'a002'], ['b004', 'b004', 'a003']];
+var data3 = [['全部', '0', '0'], ['c001', '001', 'b001'], ['c002', '002', 'b001'], ['c003', '003', 'b002'], ['c004', '004', 'b003']];
+$.cascadeDropDownBind.bind(data, { sourceID: 'Select1', selectValue: 'a001' });
+$.cascadeDropDownBind.bind(data2, { sourceID: 'Select2', selectValue: 'b002', parentID: 'Select1' });
+$.cascadeDropDownBind.bind(data3, { sourceID: 'Select3', selectValue: 'c002', parentID: 'Select2' });
+* 方法三参见cascadeDropDownBind.bind内容
+*/
+            jQuery.extend({
+//下拉框的数据对象
+                cascadeDropDownData: function () {
+//******配置属性*******
+                    this.removeFirst = true; //是否移除第一个项
+                    this.appentAllValue = ''; //如果父项目的值等于此值则显示所有项
+                    this.sourceID = ''; //此下拉框ID
+                    this.parentID = ''; //父下拉框ID
+                    this.items = []; //项的数据，二维数组，形式：[['文本', '值', '父ID'],......]; 值和父ID可省略
+                    this.selectValue = ''; //初始化选中的项
+                    this.parentValue = null; //用于从一堆数据中筛选出该组所需的项，一般用于绑定第一个下拉框
+//******配置属性*******
+//以下是全局变量，无需在外部设置
+                    this.child = null;
+                    var currentDrop = null;
+                    this.bind = function () {
+                        currentDrop = $('#' + this.sourceID);
+                        this.clear();
+//填充数据项目
+                        this.fillItem();
+//设置选中项
+                        if (this.selectValue) {
+                            currentDrop.val(this.selectValue);
+                        }
+//设置父下拉框的change事件
+                        this.setChange();
+                    };
+//清理填充项目
+                    this.clear = function () {
+                        if (this.removeFirst) {
+                            currentDrop.empty();
+                        } else {
+                            for (var i = currentDrop[0].options.length - 1; i > 0; i--) {
+                                currentDrop[0].options[i] = null;
+                            }
+                        }
+                    };
+//填充数据项目
+                    this.fillItem = function () {
+                        var _parentValue = this.parentValue;
+                        if (this.parentID)
+                            _parentValue = $('#' + this.parentID).val();
+                        var all = false;
+                        if (this.appentAllValue && _parentValue == this.appentAllValue)
+                            all = true;
+                        $.each(this.items, function (index, item) {
+                            var val = item.length > 1 ? item[1] : item[0]; //如果没有指定value则用text代替
+                            if (all || item.length <= 2 || item[2] == _parentValue) { //如果长度小于3，认为没有父下拉框则填充所有项
+                                currentDrop.append('<option value="' + val + '">' + item[0] + '</option>');
+                            }
+                        });
+                    };
+//设置父下拉框的change事件
+                    this.setChange = function () {
+                        if (this.parentID) {
+                            $('#' + this.parentID).bind('change', this.change);
+                        }
+                    };
+//父下拉框事件回调函数
+                    var _this = this;
+                    this.change = function () {
+                        _this.clear();
+                        _this.fillItem();
+                        currentDrop.change();
+                    };
+                },
+                cascadeDropDownBind: {
+                    bind: function (data, setting) {
+                        var obj = new $.cascadeDropDownData();
+                        $.extend(obj, setting);
+                        obj.items = data;
+                        obj.bind();
+                        if (setting.child) {
+                            setting.child.parentID = setting.sourceID
+                            this.bind(data, setting.child);
+                        }
+                    }
+                }
+            });
+            /*
+            * 插件二：ajaxDropDownData适用于每个子级下拉框都post到服务器中取数据绑定。
+            * 该插件优秀之处在于会将已使用过的数据缓存达到高效率的目的。
+            * 注意：缓存的键值不仅仅是父下拉框的值，而是从顶级下拉框到当前父下拉框的值组合，这是为了对付出现相同父下拉框对应的子级并不相同的情况
+            * 同样的原因，postback中回发给服务器的form表单中也是包括所有的父下拉框的值
+            * 使用方法：
+            var firstItems = null; //也可以将第一个下拉框的数据数组放到这进行绑定，或者设置为空，不改变下拉框。
+            $.ajaxDropDownBind.bindTopDrop('Select1', firstItems, null, false, 'Select2');
+            $.ajaxDropDownBind.bindCallback('Select2', null, false, 'Select3', 'http://localhost:4167/GetDropDownData.ashx?action=select1');
+            $.ajaxDropDownBind.bindCallback('Select3', null, false, null, 'http://localhost:4167/GetDropDownData.ashx?action=select2');
+            $('#Select1').change();
+            * 最重要的是级联的ID设置不能缺少。高级用法参见$.ajaxDropDownBind.bindCallback方法的内容。
+            */
+            jQuery.extend({
+//此对象是个链表结构
+                ajaxDropDownData: function () {
+//******配置属性*******
+                    this.sourceID = ''; //此下拉框ID
+                    this.items = []; //此项的数据，二维数组，形式：[['文本', '值', '父ID'],......]; 值和父ID可省略
+                    this.callback = null; //回调函数，用于获取下一级的方法，此函数接收2个参数：value, dropdownlist分别代表父级下拉框选中的值及本身的实例
+                    this.childID = ''; //关联的子控件ID
+                    this.removeFirst = true; //是否移除该项第一个选项
+                    this.selectValue = ''; //此项初始化选中的值
+//******配置属性*******
+//********************下面是系统变量及方法****************************************************
+                    this.childItem = []; //子对象列表，用于缓存
+                    this.parentObj = null; //父对象
+                    this.canChange = true;
+                    this.clearItem = true;
+                    this.bind = function () {
+                        $.ajaxDropDownBind.bindData(this);
+                    };
+                    this.bindData = function (setting) {
+                        $.extend(this, setting);
+                        $.ajaxDropDownBind.bindData(this);
+                    };
+                    /*回溯到根节点，从根节点开始按照级联取当前正确的下拉框的对象
+                    由于下拉框的事件只有一个，而对应的对象有多个，所以这里需要先回溯到根，在从根开始找起
+                    */
+                    this.getRightOnChangeObj = function () {
+                        if (this.parentObj)
+                            return this.parentObj.getRightOnChangeObj().childItem[$('#' + this.parentObj.sourceID).val()]; //递归
+                        else
+                            return this;
+                    }
+                },
+                ajaxDropDownBind: {
+                    currentDrop: null,
+                    _thisData: null,
+                    callbackPool: [],
+//清理填充项目
+                    clear: function () {
+                        if (_thisData.removeFirst) {
+                            currentDrop.empty();
+                        } else {
+                            for (var i = currentDrop[0].options.length - 1; i > 0; i--) {
+                                currentDrop[0].options[i] = null;
+                            }
+                        }
+                    },
+//填充数据项目
+                    fillItem: function () {
+                        for (var i = 0; i < _thisData.items.length; i++) {
+                            var val = _thisData.items[i].length > 1 ? _thisData.items[i][1] : _thisData.items[i][0]; //如果没有指定value则用text代替
+                            currentDrop.append('<option value="' + val + '">' + _thisData.items[i][0] + '</option>');
+                        }
+//设置选中项
+                        if (_thisData.selectValue) {
+                            currentDrop.val(_thisData.selectValue);
+                            _thisData.selectValue = '';
+                        }
+                    },
+//参数data是指当前变化的下拉框所在的对象
+                    bindData: function (data) {
+                        _thisData = data;
+                        currentDrop = $('#' + _thisData.sourceID); //本身的节点而不是子级
+                        if (_thisData.clearItem)
+                            this.clear();
+                        if (_thisData.items)
+                            this.fillItem();
+                        if (_thisData.childID) {
+                            if (!currentDrop.data('binded')) { //判断是否绑定过事件，绑定过的不在绑定
+                                currentDrop.data('binded', true);
+                                var _firstChangeObj = _thisData; //由于下拉框的事件只有一个，而对应的对象有多个，所以这里的对象是绑定时的对象，而非正确的对象
+                                currentDrop.bind('change', function () {
+                                    var rightChildItem = _firstChangeObj.getRightOnChangeObj().childItem;
+                                    var thisValue = $('#' + _firstChangeObj.sourceID).val(); //获取当前变化的下拉框的值，注意不能用currentDrop代替，因为currentDrop也是旧的值
+                                    if (rightChildItem[thisValue]) {
+                                        console.log('cache');
+                                        rightChildItem[thisValue].bind(); //使用缓存的数据来绑定
+                                    }
+                                    else {
+                                        console.log('getdata');
+//一个新的实例，并建立链表关系
+                                        var dropData = new $.ajaxDropDownData();
+                                        dropData.sourceID = _firstChangeObj.childID;
+                                        dropData.parentObj = _firstChangeObj;
+                                        rightChildItem[thisValue] = dropData; //设置缓存
+                                        if (_firstChangeObj.callback) //如果有回调函数则直接调用，否则调用系统自动生成的函数
+                                            _firstChangeObj.callback(thisValue, dropData); //回调函数
+                                        else {
+                                            var callback = $.ajaxDropDownBind.callbackPool[dropData.sourceID];
+                                            if (callback)
+                                                callback(thisValue, dropData);
+                                        }
+                                    }
+                                });
+                            }
+                            if (_thisData.canChange)
+                                currentDrop.change();
+                        }
+                    },
+//绑定第一级下拉框
+                    bindTopDrop: function (sourceID, items, selectValue, removeFirst, childID) {
+                        var mydrop = new $.ajaxDropDownData();
+                        mydrop.sourceID = sourceID;
+                        mydrop.items = items;
+                        if (!items || items.length == 0)
+                            mydrop.clearItem = false;
+                        mydrop.removeFirst = removeFirst;
+                        mydrop.selectValue = selectValue;
+                        mydrop.childID = childID;
+                        mydrop.canChange = false;
+                        mydrop.bind();
+                    },
+//绑定子级下拉框
+                    bindCallback: function (sourceID, selectValue, removeFirst, childID, parentPostUrl) {
+                        var callback = function (value, dropdownlist) {
+                            var postData = {};
+                            var parentObj = dropdownlist.parentObj;
+                            while (parentObj) {
+                                postData[parentObj.sourceID] = $('#' + parentObj.sourceID).val();
+                                parentObj = parentObj.parentObj;
+                            }
+                            $.getJSON(parentPostUrl + '&jsoncallback=?', postData, function (data) {
+                                dropdownlist.items = data;
+                                dropdownlist.removeFirst = removeFirst;
+                                dropdownlist.selectValue = selectValue;
+                                dropdownlist.childID = childID;
+                                dropdownlist.bind();
+                            });
+                        };
+                        this.callbackPool[sourceID] = callback;
+                    }
+                }
+            });
+            /*
+            使用方法代码里有注释，不赘述，欢迎拍砖。
+            不知道怎么添加附件，把测试代码也一并贴上来，因为插件二需要服务器端的配合这里就不贴插件二的测试代码。
+            插件一测试代码
+            复制代码 代码如下:
+            * */
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                toggleSetting();
+                $('#selCase').bind('change', toggleSetting);
+            });
+
+            function toggleSetting() {
+                if ($('#selCase').val() == '1')
+                    $('table tr').each(function (i, item) {
+                        $($(item).find('td')[3]).hide();
+                    });
+                else
+                    $('table tr').each(function (i, item) {
+                        $($(item).find('td')[3]).show();
+                    });
+            }
+
+            function test() {
+                if ($('#selCase').val() == '1')
+                    testcase1();
+                else
+                    testcase2();
+            }
+
+            function testcase1() {
+                $('#Select1').remove();
+                $('#Select2').remove();
+                $('#Select3').remove();
+                $('#selContainer').html('<select id="Select1"><option value="-1">全部</option></select><select id="Select2"><option value="-1">全部</option></select><select id="Select3"><option value="-1">全部</option></select>');
+                var dataItem = [['a001', 'a001', '0'], ['a002', 'a002', '0'], ['a003', 'a003', '0']
+                    , ['b001', 'b001', 'a001'], ['b002', 'b002', 'a001'], ['b003', 'b003', 'a002'], ['b004', 'b004', 'a002'], ['b005', 'b005', 'a003']
+                    , ['c001', '001', 'b001'], ['c002', '002', 'b001'], ['c003', '003', 'b002'], ['c004', '004', 'b002'], ['c005', '005', 'b003'], ['c006', '006', 'b004'], ['c007', '007', 'b004'], ['c008', '008', 'b005']
+                ];
+                $.cascadeDropDownBind.bind(dataItem,
+                    {
+                        sourceID: 'Select1', selectValue: $('#tb1sel').val(), parentValue: '0', removeFirst: false,
+                        child: {
+                            sourceID: 'Select2',
+                            selectValue: $('#tb2sel').val(),
+                            removeFirst: $('#cb2Remove').attr('checked'),
+                            child: {
+                                sourceID: 'Select3',
+                                selectValue: $('#tb3sel').val(),
+                                removeFirst: $('#cb3Remove').attr('checked')
+                            }
+                        }
+                    }
+                );
+            }
+
+            function testcase2() {
+                $('#Select1').remove();
+                $('#Select2').remove();
+                $('#Select3').remove();
+//$('#selContainer').html('<select id="Select1"></select><select id="Select2"></select><select id="Select3"></select>');
+                $('#selContainer').html('<select id="Select1"><option value="0">全部</option></select><select id="Select2"><option value="0">全部</option></select><select id="Select3"><option value="0">全部</option></select>');
+                var data = [['a001', 'a001'], ['a002', 'a002'], ['a003', 'a003']];
+                var data2 = [['b001', 'b001', 'a001'], ['b002', 'b002', 'a001'], ['b003', 'b003', 'a002'], ['b004', 'b004', 'a002'], ['b005', 'b005', 'a003']];
+                var data3 = [['c001', '001', 'b001'], ['c002', '002', 'b001'], ['c003', '003', 'b002'], ['c004', '004', 'b002'], ['c005', '005', 'b003'], ['c006', '006', 'b004'], ['c007', '007', 'b004'], ['c008', '008', 'b005']];
+                $.cascadeDropDownBind.bind(data, {
+                    sourceID: 'Select1',
+                    selectValue: $('#tb1sel').val(),
+                    removeFirst: false
+                });
+                $.cascadeDropDownBind.bind(data2, {
+                    sourceID: 'Select2',
+                    selectValue: $('#tb2sel').val(),
+                    parentID: 'Select1',
+                    removeFirst: $('#cb2Remove').attr('checked'),
+                    appentAllValue: $('#tb2AllValue').val()
+                });
+                $.cascadeDropDownBind.bind(data3, {
+                    sourceID: 'Select3',
+                    selectValue: $('#tb2sel').val(),
+                    parentID: 'Select2',
+                    removeFirst: $('#cb3Remove').attr('checked'),
+                    appentAllValue: $('#tb3AllValue').val()
+                });
+            }
+        </script>
+    </div>
+</form>
+</body>
+</html>

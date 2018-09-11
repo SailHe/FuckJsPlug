@@ -1,0 +1,111 @@
+.demo {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.demo li {
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
+    /*background: #f36;*/
+    /*color: green;*/
+    margin-right: 5px;
+    list-style-type: none;
+    background-color: grey;
+    color: orange;
+}
+
+/*通配符选择器（＊） 选择某个元素下的所有元素 的margin和padding都设置为0*/
+.demo * {
+    margin: 0;
+    padding: 0;
+    border: 1px solid blue;
+}
+
+/*.important {*/
+    /*font-weight: bold;*/
+    /*color: yellow;*/
+/*}*/
+
+/*!*元素选择器(E)*!*/
+/*p.items {*/
+    /*color: red;*/
+/*}*/
+
+/*!*类选择器（.className）*!*/
+/*.important {*/
+    /*font-weight: bold;*/
+/*}*/
+
+/*.active {*/
+    /*color: green;*/
+    /*background: lime;*/
+/*}*/
+
+/*.items {*/
+    /*color: #fff;*/
+    /*background: #000;*/
+/*}*/
+
+/*.important.items {*/
+    /*background: #ccc;*/
+/*}*/
+
+/*.first.last {*/
+    /*color: blue;*/
+/*}*/
+
+/*.first.last {*/
+    /*color: blue;*/
+/*}*/
+
+/*!*id选择器（#ID）*!*/
+/*#first {*/
+    /*background: lime;*/
+    /*color: #000;*/
+/*}*/
+
+/*#last {*/
+    /*background: #000;*/
+    /*color: lime;*/
+/*}*/
+
+/*!*后代选择器（Ｅ Ｆ） 选中div.demo中所有的li元素*!*/
+/*.demo li {*/
+    /*color: blue;*/
+/*}*/
+
+/*!*子元素选择器(E>F) 选择ul下的所有子元素li*!*/
+/*ul > li {*/
+    /*background: green;*/
+    /*color: yellow;*/
+/*}*/
+
+/*!*相邻兄弟元素选择器(E + F) 选择li的相邻元素li，我们这里一共有十个li，选择了从第2个li到 10 个li，一共九个*!*/
+/*li + li {*/
+    /*background: green;*/
+    /*color: yellow;*/
+    /*border: 1px solid #ccc;*/
+/*}*/
+
+/*!*通用兄弟选择器（Ｅ 〜 Ｆ） 选择中了li.active 元素后面的所有兄弟元素li*!*/
+/*.active ~ li {*/
+    /*background: green;*/
+    /*color: yellow;*/
+    /*border: 1px solid #ccc;*/
+/*}*/
+
+/*!*群组选择器（selector1,selector2,...,selectorN） 因为li.first和li.last具有相同的样式效果，所以我们把他们写到一个组里来*!*/
+/*.first, .last {*/
+    /*background: green;*/
+    /*color: yellow;*/
+    /*border: 1px solid #ccc;*/
+/*}*/
+
+

@@ -1,0 +1,46 @@
+/*时间：2010/10/26
+文字横排 竖写
+          CSS实现文字横排效果有两种方法，建议使用模拟方法实现。
+          一、使用writing-mode属性
+          语法：writing-mode:lr-tb或writing-mode:tb-rl
+          参数：
+          1、lr-tb：从左向右，从上往下
+          2、tb-rl：从上往下，从右向左
+          IE显示正常，火狐却不行，所以不建议使用writing-mode属性
+         */
+.horizontal-discard {
+    font-size: 11pt;
+    width: 100px;
+    height: 80px;
+    writing-mode: tb-rl;
+}
+
+/*二、模拟文字横排
+让li右浮动，设置li宽度和字宽度一样都是14px，这样就自动换行了。
+另外，“word-wrap:break-word;word-break:normal;”这句实现标点自动换行（连续字符自动换行）。
+
+http://www.w3school.com.cn/cssref/css_selectors.asp
+https://blog.csdn.net/leewokan/article/details/6626774
+div,p	选择所有 <div> 元素和所有 <p> 元素。
+div p	选择 <div> 元素内部的所有 <p> 元素。
+div>p	选择父元素为 <div> 元素的所有 <p> 元素。
+div+p	选择紧接在 <div> 元素之后的所有 <p> 元素。
+此处选择id="horizontal-simulation" (貌似不能换成 .class ul) 的元素内部的所有ul
+*/
+#horizontal-simulation ul {
+    width: 100px;
+    height: 80px;
+    overflow: hidden;
+    list-style: none;
+}
+
+#horizontal-simulation ul li {
+    float: right;
+    display: inline;
+    margin-left: 4px;
+    width: 14px;
+    height: 100px;
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: normal;
+}

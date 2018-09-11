@@ -1,0 +1,30 @@
+/*ul并且其有一个类名叫“horizontal-test”的元素*/
+ul.horizontal-test {
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+ul.horizontal-test li {
+    list-style-image: none;
+    list-style-type: none;
+    background-color: #999999;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #000000;
+    float: left;
+}
+
+ul.horizontal-test li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0px;
+    padding-top: 8px;
+    display: block; /* 作为一个块 */
+    padding-right: 50px; /* 设置块的属性 */
+    padding-bottom: 8px;
+    padding-left: 50px;
+}
+
+ul.horizontal-test li a:hover {
+    background-color: #0099CC;
+}

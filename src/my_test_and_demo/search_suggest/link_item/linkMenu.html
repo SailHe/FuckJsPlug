@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>级联菜单</title>
+    <script type="text/javascript" src="../../../plugins/jQuery/jquery.min.js"></script>
+    <style type="text/css">
+        div {
+            font-size: 11pt;
+            width: 150px;
+        }
+    </style>
+    <script type="text/javascript">
+        var showdata = [];
+        var valuedata = [];
+        showdata[0] = [];
+        valuedata[0] = [];
+        showdata[0][0] = "上海";
+        valuedata[0][0] = "0101";
+        showdata[0][1] = "北京";
+        valuedata[0][1] = "0102";
+        showdata[0][2] = "广州";
+        valuedata[0][2] = "0103";
+
+        showdata[1] = [];
+        valuedata[1] = [];
+
+        showdata[1][0] = "纽约";
+        valuedata[1][0] = "0201";
+        showdata[1][1] = "华盛顿";
+        valuedata[1][1] = "0202";
+        showdata[1][2] = "加州";
+        valuedata[1][2] = "0203";
+
+        showdata[2] = [];
+        valuedata[2] = [];
+
+        showdata[2][0] = "伦敦";
+        valuedata[2][0] = "0301";
+        showdata[2][1] = "利物浦";
+        valuedata[2][1] = "0302";
+        showdata[2][2] = "伯明翰";
+        valuedata[2][2] = "0303";
+
+        function change(target) {
+            var deselect = document.getElementById("deselect");
+            deselect.innerHTML = null;
+            var m = target.selectedIndex;
+            if (m >= 0) {
+                for (var i = 0; i < showdata[m].length; i++) {
+                    deselect.options[i] = new Option(showdata[m][i], valuedata[m][i]);
+                }
+                deselect.options[0].selected = true;
+            }
+        }
+    </script>
+</head>
+<body>
+<div content="align">
+    <form id="casecadeform">
+        <select id="caselect" onchange="change(this)">
+            <option value="China">中国</option>
+            <option value="USA">美国</option>
+            <option value="England">英国</option>
+        </select>
+        <select id="deselect">
+            <option value="shanghai">上海</option>
+            <option value="beijing">北京</option>
+            <option value="guangzhou">广州</option>
+        </select>
+    </form>
+</div>
+</body>
+</html>

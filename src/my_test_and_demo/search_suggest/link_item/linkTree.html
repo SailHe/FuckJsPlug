@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../plugins/jQuery/jquery.min.js"></script>
+    <style type="text/css">
+        .Tree {
+            min-width: 200px;
+            min-height: 200px;
+            border: solid 1px #ccc;
+            text-align: left;
+            border: dashed 1px #ccc;
+        }
+
+        .branch {
+            background: url(http://d.lanrentuku.com/down/png/1005/rainbow_shadow.jpg) no-repeat;
+            padding-left: 30px;
+            display: none;
+            min-height: 25px;
+        }
+
+        .branchon {
+            background: url(http://d.lanrentuku.com/down/png/1005/rainbow_shadow.jpg) no-repeat;
+            padding-left: 30px;
+            display: none;
+            min-height: 25px;
+            border-left: dashed 1px #ccc;
+        }
+
+        .leaf {
+            background: url(http://d.lanrentuku.com/down/png/1005/rainbow_shadow.jpg) no-repeat;
+            padding-left: 30px;
+            display: none;
+            min-height: 25px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    $(function JQeryTree() {
+        $(function LoadCss() {
+            var Tree = $("#jquerytree");
+            Tree = Tree.children();
+            Tree.addClass("Tree");
+            Tree = Tree.children();
+            while (Tree.is("div")) {
+                Tree.addClass("leaf");
+                Tree.children().parent().removeClass("leaf");
+                Tree.children().parent().addClass("branch");
+                Tree = Tree.children();
+            }
+            var FirstBranchs = $(".Tree").children();
+            FirstBranchs.css("display", "block");
+            FirstBranchs.css("border", "0");
+        });
+        $(function LoadEvent() {
+            $(".branch").click(function () {
+                $(this).children().slideToggle();
+                $(this).toggleClass("branch");
+                $(this).toggleClass("branchon");
+                return false;//阻止冒泡
+            });
+            $(".leaf").click(function () {
+                return false;//阻止冒泡
+            });
+        });
+    });
+</script>
+<div id="jquerytree">
+    <div>
+
+        <div>一级菜单
+
+            <div>二级菜单
+
+                <div>三级菜单</div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
