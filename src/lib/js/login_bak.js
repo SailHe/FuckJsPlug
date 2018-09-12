@@ -101,32 +101,3 @@ $("#defaultForm").bootstrapValidator({
         }
     }
 });
-
-$('#dataTableForm').bootstrapValidator({
-    feedbackIcons: {
-        valid: 'fa fa-ok',
-        invalid: 'fa fa-remove',
-        validating: 'fa fa-refresh'
-    },
-    fields: {
-        goodsName: {
-            validators: {
-                notEmpty: {
-                    message: '非空！'
-                },
-                numeric: {
-                    message: '数字! '
-                }
-            }
-        }, username: {
-            validators: {
-                notEmpty: {
-                    message: '非空！'
-                },
-                numeric: {
-                    message: '数字! '
-                }
-            }
-        },
-    }
-});
