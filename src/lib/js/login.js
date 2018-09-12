@@ -12,6 +12,7 @@ $(() => {
  * @date 2018/9/10 20:39
  */
 const PATTERN_PASSWORD = /^[\w_-]{6,16}$/;
+const PATTERN_EMAILADDRESS = /^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$/;
 
 $('input[name=loginInButton]').on('click', () => {
     $.messageBox("欢迎回来!");
@@ -31,17 +32,16 @@ $('input[name=loginUpButton]').on('click', () => {
     );
 });
 
-//下面就是bootstrapValidator的初始化 定义你需要的哪些表单需要验证，验证什么内容
-/*
-$("#defaultForm").bootstrapValidator({
-    //这里是用来对应三种不同状态时，在输入框后面添加的图标
-    feedbackIcons: {
+$('form').on('onkeyup', function () {
+
+}).find(':input').on('blur', function () {
+    //$.messageBox(`触发${$(this).prev('label').text()}验证!`);
+    const feedbackIcons = {
         valid: 'fa fa-ok',
         invalid: 'fa fa-remove',
         validating: 'fa fa-refresh'
-    },
-    //哪些字段需要验证，和html中的输入框，下拉框等等表单name属性所对应。
-    fields: {
+    }
+    const fields = {
         username: {
             //可以有多个验证信息
             validators: {
@@ -57,40 +57,57 @@ $("#defaultForm").bootstrapValidator({
                     message: "长度在4到16位之间！！！"
                 }
             }
-        }, password: {
+        },
+        loginInPassword: {
             validators: {
                 notEmpty: {
                     message: "请输入密码！！！"
                 }, regexp: {
                     regexp: PATTERN_PASSWORD,
                     message: "最短6位，最长16位, "
-                }, regexp: {
-                    regexp: "[\\w_-]{6,16}",
+                }/*, regexp: {
+                    regexp: /"[\\w_-]{6,16}"/,
                     message: "最短6位，最长16位的大小写字母"
+                }*/
+            }
+        },
+        loginUpPassword: {
+            validators: {
+                notEmpty: {
+                    message: "请输入密码！！！"
+                }, regexp: {
+                    regexp: PATTERN_PASSWORD,
+                    message: "最短6位，最长16位, "
+                }, identical: {
+                    field: 'confirmPassword',
+                    message: "两次输入的密码不一致！！！"
                 }
             }
-        }, confirmPassword: {
+        },
+        confirmPassword: {
             validators: {
                 notEmpty: {
                     message: "请输入确认密码！！！"
                 },
                 //用来判断制定的字段和当前字段一致与否
                 identical: {
-                    field: 'password',
+                    field: 'loginUpPassword',
                     message: "两次输入的密码不一致！！！"
                 }
             }
-        }, idCard: {
+        },
+        idCard: {
             validators: {
                 notEmpty: {
                     message: "请输入身份证号！！！"
                 },
                 regexp: {
-                    regexp: '^[1-9]\\d{14}(\\d{2}[0-9x])?$',
+                    regexp: /^[1-9]\d{14}(\d{2}[0-9x])?$/,
                     message: "输入的身份证号不对！！！"
                 }
             }
-        }, emailAddress: {
+        },
+        emailAddress: {
             validators: {
                 notEmpty: {
                     message: "请输入邮箱！！！"
@@ -101,34 +118,42 @@ $("#defaultForm").bootstrapValidator({
             }
         }
     }
-});
-
-$('#dataTableForm').bootstrapValidator({
-    feedbackIcons: {
-        valid: 'fa fa-ok',
-        invalid: 'fa fa-remove',
-        validating: 'fa fa-refresh'
-    },
-    fields: {
-        goodsName: {
-            validators: {
-                notEmpty: {
-                    message: '非空！'
-                },
-                numeric: {
-                    message: '数字! '
+    const validatorField = fields[this.name];
+    if (isValidVar(validatorField)) {
+        //$.messageBox(`验证名: ${this.name}`);
+        const validators = validatorField['validators'];
+        if (isValidVar(validators)) {
+            //$.messageBox(`验证结果: ${ PATTERN_PASSWORD.test(this.value)}`);
+            for (let validatorName in validators) {
+                let validator = validators[validatorName];
+                let validSuccess = false;
+                switch (validatorName) {
+                    case 'notEmpty' :
+                        validSuccess = isValidVar(this.value);
+                        break;
+                    case 'identical' :
+                        validSuccess = $(this).closest('form').find(`:input[name=${validator['field']}]`).val() === (this.value);
+                        break;
+                    case 'stringLength' :
+                        validSuccess = betweenNumLORC(
+                            validator['min'], this.value.length
+                            , parseFloat(validator['max']) + 1
+                        );
+                        break;
+                    case 'regexp' :
+                        validSuccess = validator['regexp'].test(this.value);
+                        break;
+                    case 'emailAddress' :
+                        validSuccess = PATTERN_EMAILADDRESS.test(this.value);
+                        break;
+                    default :
+                        "";
+                        break;
+                }
+                if (!validSuccess) {
+                    $.messageBox(`${validator['message']}`);
                 }
             }
-        }, username: {
-            validators: {
-                notEmpty: {
-                    message: '非空！'
-                },
-                numeric: {
-                    message: '数字! '
-                }
-            }
-        },
+        }
     }
 });
-*/

@@ -993,6 +993,17 @@ function calcDiffDay(startDate, endDate) {
     return diffDay;
 }
 
+/**
+ * Descriptions: 左开右闭<p>
+ * Left open and right closed
+ *
+ * @author SailHe
+ * @date 2018/9/12 12:44
+ */
+const betweenNumLORC = (min, num, max) =>{
+    return min <= num && num < max;
+}
+
 /*
 $(document).on("show.bs.modal", ".modal", function () {
     $(this).draggable({

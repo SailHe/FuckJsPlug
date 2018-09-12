@@ -15,83 +15,81 @@
 <body>
 
 <div class="container">
-    <form id="defaultForm" class="form-horizontal">
-        <div class="login-wrap">
-            <div class="login-html">
-                <!--Sign In标签-->
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
-                <label for="tab-1" class="tab clickable">登 录</label>
+    <div class="login-wrap">
+        <div class="login-html">
+            <!--Sign In标签-->
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+            <label for="tab-1" class="tab clickable">登 录</label>
 
-                <!--Sign Up标签 register-->
-                <input id="tab-2" type="radio" name="tab" class="sign-up">
-                <label for="tab-2" class="tab clickable">注 册</label>
+            <!--Sign Up标签 register-->
+            <input id="tab-2" type="radio" name="tab" class="sign-up">
+            <label for="tab-2" class="tab clickable">注 册</label>
 
-                <!--Login表单-->
-                <div class="login-form">
-                    <!--登录Html-->
-                    <div class="sign-in-htm">
-                        <div class="group form-group">
-                            <label class="label">用户名</label>
-                            <input name="username" type="text" class="input">
-                        </div>
-                        <div class="group form-group">
-                            <label class="label">密码</label>
-                            <input name="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group form-group">
-                            <input id="check" type="checkbox" class="check" checked>
-                            <!--for属性: 点击文本标记之一，就可以触发相关控件 通过id标识; 规定 label 与哪个表单元素绑定。-->
-                            <!--Keep me Signed in-->
-                            <label for="check"><span class="icon"></span> 保持登录 </label>
-                        </div>
-                        <div class="group form-group">
-                            <input type="submit" name="loginInButton" class="button clickable" value="登 录 big">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <a href="inputBox.html">forgot-忘记了密码?</a>
-                        </div>
+            <!--Login表单-->
+            <div class="login-form">
+                <!--登录Html-->
+                <form id='login-in-form' class="sign-in-htm">
+                    <div class="group form-group">
+                        <label class="label">用户名</label>
+                        <input name="username" type="text" class="input">
                     </div>
-
-                    <!--注册Html-->
-                    <div class="sign-up-htm">
-                        <div class="group form-group">
-                            <label class="label">用户名</label>
-                            <input name="username" type="text" class="input">
-                        </div>
-                        <div class="group form-group">
-                            <label class="label">密码</label>
-                            <input name="password" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group form-group">
-                            <label class="label">重复密码</label>
-                            <input name="confirmPassword" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group form-group">
-                            <label class="label">邮箱</label>
-                            <input name="emailAddress" type="text" class="input">
-                        </div>
-                        <div class="group form-group">
-                            <label class="label">身份证号</label>
-                            <input name="idCard" type="text" class="input">
-                        </div>
-                        <!--<div class="group form-group">
-                          <label class="label">生日</label>
-                          <input name="birthday" type="text" class="input">
-                        </div>-->
-
-                        <div class="group form-group">
-                            <input type="submit" name="loginUpButton" class="button" value="注 册 big">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <label for="tab-1">已经有帐号了?</label>
-                        </div>
+                    <div class="group form-group">
+                        <label class="label">密码</label>
+                        <input name="loginInPassword" type="password" class="input" data-type="password">
                     </div>
-                </div>
+                    <div class="group form-group">
+                        <input id="check" type="checkbox" class="check" checked>
+                        <!--for属性: 点击文本标记之一，就可以触发相关控件 通过id标识; 规定 label 与哪个表单元素绑定。-->
+                        <!--Keep me Signed in-->
+                        <label for="check"><span class="icon"></span> 保持登录 </label>
+                    </div>
+                    <div class="group form-group">
+                        <input type="submit" name="loginInButton" class="button clickable" value="登 录 big">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="inputBox.html">forgot-忘记了密码?</a>
+                    </div>
+                </form>
+
+                <!--注册Html-->
+                <form id='login-up-form' class="sign-up-htm">
+                    <div class="group form-group">
+                        <label class="label">用户名</label>
+                        <input name="username" type="text" class="input">
+                    </div>
+                    <div class="group form-group">
+                        <label class="label">密码</label>
+                        <input name="loginUpPassword" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group form-group">
+                        <label class="label">重复密码</label>
+                        <input name="confirmPassword" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group form-group">
+                        <label class="label">邮箱</label>
+                        <input name="emailAddress" type="text" class="input">
+                    </div>
+                    <div class="group form-group">
+                        <label class="label">身份证号</label>
+                        <input name="idCard" type="text" class="input">
+                    </div>
+                    <!--<div class="group form-group">
+                      <label class="label">生日</label>
+                      <input name="birthday" type="text" class="input">
+                    </div>-->
+
+                    <div class="group form-group">
+                        <input type="submit" name="loginUpButton" class="button" value="注 册 big">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">已经有帐号了?</label>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 
