@@ -188,3 +188,5 @@ table.columns().flatten().each(function (colIdx) {
             select.append($('<option value="' + d + '">' + d + '</option>'));
         });*!/
 }*/
+
+alert('排序会出问题');
