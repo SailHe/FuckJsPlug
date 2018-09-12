@@ -135,7 +135,8 @@ function listStationRequest() {
         type: 'post',
         dataType: 'json',
         async: false,
-        url: 'myLib/station.json',
+        //这个url事实上是相对于调用者来说的
+        url: '../myLib/station.json',
         success: function (result) {
             if (result.success) {
                 $("#stationStorehouse").empty();
