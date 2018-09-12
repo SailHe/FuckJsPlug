@@ -32,7 +32,6 @@ $('input[name=loginUpButton]').on('click', () => {
 });
 
 //下面就是bootstrapValidator的初始化 定义你需要的哪些表单需要验证，验证什么内容
-/*
 $("#defaultForm").bootstrapValidator({
     //这里是用来对应三种不同状态时，在输入框后面添加的图标
     feedbackIcons: {
@@ -131,4 +130,3 @@ $('#dataTableForm').bootstrapValidator({
         },
     }
 });
-*/
