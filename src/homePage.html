@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <!--<link rel="stylesheet" href="home.css"/>-->
+    <style>
+        /*! CSS Used from: Embedded */
+        .menu-container .dynamic-edge li a .line-base {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .menu-container .dynamic-edge li a::before, .menu-container .dynamic-edge li a::after {
+            position: absolute;
+            left: 0;
+            content: "";
+            display: block;
+            width: 1px;
+            height: 0px;
+            background: #333;
+            z-index: 1;
+        }
+
+        .menu-container .dynamic-edge li a::before {
+            top: 0;
+        }
+
+        .menu-container .dynamic-edge li a::after {
+            bottom: 0;
+        }
+
+        .menu-container .dynamic-edge li a .btn-inner {
+            position: relative;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: box;
+            display: flex;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -o-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            min-height: 50px;
+        }
+
+        .menu-container .dynamic-edge li a .btn-inner::before, .menu-container .dynamic-edge li a .btn-inner::after {
+            position: absolute;
+            right: 0;
+            content: "";
+            display: block;
+            width: 0px;
+            height: 1px;
+            background: #333;
+            z-index: 1;
+        }
+
+        .menu-container .dynamic-edge li a .btn-inner::before {
+            top: 0;
+        }
+
+        .menu-container .dynamic-edge li a .btn-inner::after {
+            bottom: 0;
+        }
+
+        .menu-container .dynamic-edge li a .text {
+            position: relative;
+            display: block;
+            width: 100%;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .menu-container .dynamic-edge li a .text .shift {
+            display: block;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .menu-container .dynamic-edge li a .line {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            display: block;
+            width: 1px;
+            height: 10px;
+            background: #333;
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        @media screen and (min-width: 751px) {
+            /*hover: 选择鼠标指针浮动在其上的元素，并设置其样式：*/
+            .menu-container .dynamic-edge li a:hover .line {
+                animation: hoverLine-1 0.15s ease forwards;
+            }
+
+            .menu-container .dynamic-edge li a:hover .text .shift {
+                margin-left: 10px;
+            }
+
+            .menu-container .dynamic-edge li a:hover .btn-inner::before, .menu-container .dynamic-edge li a:hover .btn-inner::after {
+                width: 0;
+                animation: hoverLine-2 0.5s ease forwards 0.15s;
+            }
+
+            .menu-container .dynamic-edge li a:hover::before, .menu-container .dynamic-edge li a:hover::after {
+                animation: hoverLine-3 0.15s ease forwards 0.7s;
+            }
+        }
+
+        div, span, a, ul, li {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-weight: inherit;
+            font-style: inherit;
+            font-family: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .menu-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+            font-family: Meiryo, sans-serif;
+            box-sizing: border-box;
+            overflow: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            background-attachment: fixed;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container {
+                background-attachment: fixed;
+            }
+        }
+
+        .menu-container .inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container .inner {
+                display: -webkit-box;
+                display: -moz-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: box;
+                display: flex;
+                -webkit-box-pack: center;
+                -moz-box-pack: center;
+                -o-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -moz-box-align: center;
+                -o-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+        }
+
+        .menu-container .menu-contents {
+            padding: 85px 13.333333333333334% 0;
+            box-sizing: border-box;
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container .menu-contents {
+                display: -webkit-box;
+                display: -moz-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: box;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -moz-box-orient: vertical;
+                -o-box-orient: vertical;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                width: 74.07407407407408%;
+                padding: 0;
+            }
+        }
+
+        @media screen and (min-width: 751px) and (max-width: 960px) {
+            .menu-container .menu-contents {
+                width: 83.33333333333334%;
+            }
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container .dynamic-edge {
+                -webkit-box-ordinal-group: 3;
+                -moz-box-ordinal-group: 3;
+                -o-box-ordinal-group: 3;
+                -ms-flex-order: 3;
+                -webkit-order: 3;
+                order: 3;
+                width: 47.5%;
+            }
+        }
+
+        .menu-container .dynamic-edge ul {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: box;
+            display: flex;
+            -webkit-box-pack: justify;
+            -moz-box-pack: justify;
+            -o-box-pack: justify;
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+
+        .menu-container .dynamic-edge li {
+            width: 48.18181818181818%;
+            box-sizing: border-box;
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container .dynamic-edge li {
+                width: 44.73684210526316%;
+            }
+        }
+
+        .menu-container .dynamic-edge li a {
+            position: relative;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: box;
+            display: flex;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -o-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        @media screen and (min-width: 751px) {
+            .menu-container .dynamic-edge li a {
+                display: block;
+            }
+        }
+
+        .menu-container .dynamic-edge li a .text {
+            padding: 12px 0 12px 10px;
+            font-size: 13px;
+            font-size: 1.3rem;
+        }
+
+        @media screen and (min-width: 751px) and (max-width: 960px) {
+            .menu-container .dynamic-edge li a .text {
+                font-size: 11px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .menu-container .dynamic-edge li a .icon-arrow {
+            position: absolute;
+            top: 50%;
+            right: 11px;
+            width: 0px;
+            height: 0px;
+            margin-top: -3px;
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #000;
+            position: absolute;
+            top: 50%;
+            right: 11px;
+            bottom: auto;
+            left: auto;
+            border-width: 3px 0 3px 8px;
+        }
+
+        .menu-container .dynamic-edge li a .line-base {
+            border: 1px solid;
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a {
+            color: #c4d700;
+            background-color: rgba(196, 215, 0, 0.15);
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a::before, .menu-container .dynamic-edge li.btn-awesome a::after {
+            background: #c4d700;
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a .btn-inner::before, .menu-container .dynamic-edge li.btn-awesome a .btn-inner::after {
+            background: #c4d700;
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a .line-base {
+            border-color: rgba(196, 215, 0, 0.4);
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a .line {
+            background: #c4d700;
+        }
+
+        .menu-container .dynamic-edge li.btn-awesome a .icon-arrow {
+            border-color: transparent transparent transparent #c4d700;
+        }
+
+        body {
+            background-color: #004831;
+        }
+
+        /*! CSS Used keyframes */
+        @keyframes hoverLine-1 {
+            0% {
+                height: 10px;
+            }
+            100% {
+                height: 100%;
+            }
+        }
+
+        @keyframes hoverLine-2 {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes hoverLine-3 {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!--设置 div 元素的不透明级别：-->
+<div class="menu-container" style="opacity: 1; display: block;">
+    <div class="inner">
+        <div class="menu-contents">
+            <div class="dynamic-edge">
+                <ul>
+                    <li class="btn-awesome">
+                        <a href="./login.html">
+                              <span class="btn-inner">
+                                <span class="text">
+                                  <span class="shift">TOP1: 登 录</span>
+                                </span>
+                                <span class="icon-arrow"></span>
+                                <span class="line"></span>
+                                <span class="line-base"></span>
+                              </span>
+                        </a>
+                    </li>
+                    <li class="btn-awesome">
+                        <a href="./login.html">
+                              <span class="btn-inner">
+                                <span class="text">
+                                  <span class="shift">TOP1: 登 录</span>
+                                </span>
+                              </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
