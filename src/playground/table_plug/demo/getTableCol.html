@@ -1,18 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>JavaScript实现获取table中某一列的值</title>
-    <script type="text/javascript">
-        function getTdValue() {
-            var tableId = document.getElementById("tab");
-            var str = "";
-            for (var i = 1; i < tableId.rows.length; i++) {
-                alert(tableId.rows[i].cells[1].innerHTML);
-            }
-        }
-    </script>
 </head>
 
 <body style="width:100%; height:100%;">
@@ -84,5 +74,17 @@
         <td>21</td>
     </tr>
 </table>
+
+<script type="text/javascript">
+    function getTdValue() {
+        const tableId = document.getElementById("tab");
+        let colElements = new Array(10);
+        for (let i = 1; i < tableId.rows.length; i++) {
+            colElements.push(tableId.rows[i].cells[1].innerHTML);
+        }
+        console.log(colElements);
+    }
+</script>
+
 </body>
 </html>
