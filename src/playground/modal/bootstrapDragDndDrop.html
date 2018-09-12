@@ -6,9 +6,10 @@
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<button class="btn btn-default">显示Modal</button>
+<button class="btn btn-default btn-modal-show">显示Modal</button>
+<button class="btn btn-default btn-modal-show">显示Modal2</button>
 
-<div class="modal fade" id="exampleModal">
+<div class="modal fade" id="exampleModal1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,61 +33,158 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="modal fade" id="exampleModal2">
+    <div class="modal-dialog" style="width: 850px;">
+        <div class="modal-content">
+            <div class="modal-header" style="min-height: 55px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+
+            <!--Form里面取元素都是通过name属性去取值的-->
+            <form class="form-horizontal" id="dataTableForm" method="post">
+                <div class="modal-body">
+                    <div class="container" style="width: 750px;">
+                        <!--<section class="col-md-12">-->
+                        <div class="form-group" style="text-align: left">
+                            <label class="col-md-2 control-label">商品全称</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control focus-prompts" name="goodsName">
+                            </div>
+
+                            <label class="col-md-2 control-label">商品简称</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control focus-prompts" name="goodsShortName">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align: left">
+                            <label class="col-md-2 control-label">商品编码</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control focus-prompts" name="goodsCode">
+                            </div>
+
+                            <label class="col-md-2 control-label">商品助记码</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control focus-prompts" name="goodsMnemonicCode">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align: left">
+                            <label class="col-md-2 control-label">商品分类</label>
+                            <div class="col-md-3">
+                                <select class="form-control" name="goodsCategory1Id" id="goodsCategory1Id"
+                                        onchange="secondaryLinkage(this, $('#goodsCategory2Id').get(0), 0);$('#goodsCategory2Id').trigger('onchange')">
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <select class="form-control" name="goodsCategory2Id" id="goodsCategory2Id"
+                                        onchange="secondaryLinkage(this, $('#goodsCategory3Id').get(0), 1);">
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <select class="form-control" name="goodsCategory3Id" id="goodsCategory3Id">
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--隐藏-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                <input type="text" readonly="readonly" class="form-control" name="goodsId" value=""
+                                       style="display:none;">
+                            </div>
+                        </div>
+                        <!--</section>--><!--左半部份-->
+
+                        <!--<section class="col-md-0">
+
+                        </section>--><!--右半部份-->
+
+                    </div> <!-- /container -->
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 <script src="//cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script type="text/javascript">
-    var $button = $('.btn-default'), $modal = $('#exampleModal');
     $(function () {
-        $button.on('click', function (event) {
-            event.preventDefault();
-            /* Act on the event */
-            $modal.show(
-                '500',
-                function () {
-                    var modal = $(this);
-                    modal.find('.modal-title').text('可拖拽Modal');
-                    $.ajax({});
-                });
-            /* 完成拖拽 */
-            $modal.draggable({
-                cursor: "move",
-                handle: '.modal-header'
-            });
-            $modal.modal('show');
-        });
-
-        //设置初始化
-        $('#exampleModal').modal({
-            //点击空白处关闭
-            backdrop: 'static',
-            //escape 键退出
-            keyboard: false,
-            focus: true,
-            //初始化后显示与否
-            show: false,
-        })
-            .on('show.bs.modal', function (e) {
+        /**
+         * Descriptions: 初始化一个可拖拽的Bootstrap Modal<p>
+         *
+         * @author SailHe
+         * @date 2018/9/12 11:21
+         */
+        const initDraggableModal = ($button, $modal) => {
+            //设置初始化
+            $modal.modal({
+                //点击空白处关闭
+                backdrop: 'static',
+                //escape 键退出
+                keyboard: false,
+                focus: true,
+                //初始化后显示与否
+                show: false,
+            }).on('show.bs.modal', function (e) {
                 console.log('显示事件触发');
             })
-            .on('shown.bs.modal', function () {
-                $('#goodsSearchText').trigger('focus');
-                console.log("显示完成");
-            })
-            //显示
-            //.modal('aop')
-            //触发一下就关闭
-            //.modal('toggle')
-            //.modal('hide')
-            /*.modal('handleUpdate')
-            .modal('dispose')*/
-            .on('hide.bs.modal', function () {
-                console.log('关闭事件触发');
-            })
-            .on('hidden.bs.modal', function () {
-                console.log('已关闭');
-            })
-        ;
+                .on('shown.bs.modal', function () {
+                    $('#goodsSearchText').trigger('focus');
+                    console.log("显示完成");
+                })
+                //显示
+                //.modal('aop')
+                //触发一下就关闭
+                //.modal('toggle')
+                //.modal('hide')
+                /*.modal('handleUpdate')
+                .modal('dispose')*/
+                .on('hide.bs.modal', function () {
+                    console.log('关闭事件触发');
+                })
+                .on('hidden.bs.modal', function () {
+                    console.log('已关闭');
+                })
+            ;//处理点击事件
+            $button.on('click', function (event) {
+                event.preventDefault();
+                $modal.show(
+                    '500',
+                    function () {
+                        const modal = $(this);
+                        modal.find('.modal-title').text('可拖拽Modal');
+                        $.ajax({});
+                    }
+                );
+                //完成拖拽
+                $modal.draggable({
+                    cursor: "move",
+                    handle: '.modal-header'
+                });
+                //显示
+                $modal.modal('show');
+            });
+        }
+
+        initDraggableModal($($('.btn-modal-show').get(0)), $('#exampleModal1'));
+        initDraggableModal($($('.btn-modal-show').get(1)), $('#exampleModal2'));
     });
 </script>
 </body>

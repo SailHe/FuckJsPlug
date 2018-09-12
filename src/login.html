@@ -15,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="lib/plugs/unity/utility.css">
 </head>
 <body>
-<button class="btn btn-default btn-modal-show">显示Modal</button>
 
 <div class="container">
     <form id="defaultForm" class="form-horizontal">
@@ -105,92 +104,7 @@
     <div id="root"></div>
 
 </section>
-<div class="modal fade" id="exampleModal">
-    <div class="modal-dialog" style="width: 850px;">
-        <div class="modal-content">
-            <div class="modal-header" style="min-height: 55px;">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
 
-            <!--Form里面取元素都是通过name属性去取值的-->
-            <form class="form-horizontal" id="dataTableForm" method="post">
-                <div class="modal-body">
-                    <div class="container" style="width: 750px;">
-                        <!--<section class="col-md-12">-->
-                        <div class="form-group" style="text-align: left">
-                            <label class="col-md-2 control-label">商品全称</label>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control focus-prompts" name="goodsName">
-                            </div>
-
-                            <label class="col-md-2 control-label">商品简称</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control focus-prompts" name="goodsShortName">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="text-align: left">
-                            <label class="col-md-2 control-label">商品编码</label>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control focus-prompts" name="goodsCode">
-                            </div>
-
-                            <label class="col-md-2 control-label">商品助记码</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control focus-prompts" name="goodsMnemonicCode">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="text-align: left">
-                            <label class="col-md-2 control-label">商品分类</label>
-                            <div class="col-md-3">
-                                <select class="form-control" name="goodsCategory1Id" id="goodsCategory1Id"
-                                        onchange="secondaryLinkage(this, $('#goodsCategory2Id').get(0), 0);$('#goodsCategory2Id').trigger('onchange')">
-                                </select>
-                            </div>
-
-                            <div class="col-md-3">
-                                <select class="form-control" name="goodsCategory2Id" id="goodsCategory2Id"
-                                        onchange="secondaryLinkage(this, $('#goodsCategory3Id').get(0), 1);">
-                                </select>
-                            </div>
-
-                            <div class="col-md-3">
-                                <select class="form-control" name="goodsCategory3Id" id="goodsCategory3Id">
-                                </select>
-                            </div>
-                        </div>
-
-                        <!--隐藏-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label"></label>
-                            <div class="col-md-3">
-                                <input type="text" readonly="readonly" class="form-control" name="goodsId" value=""
-                                       style="display:none;">
-                            </div>
-                        </div>
-                        <!--</section>--><!--左半部份-->
-
-                        <!--<section class="col-md-0">
-
-                        </section>--><!--右半部份-->
-
-                    </div> <!-- /container -->
-                </div>
-            </form>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 
 <!--<script src="./lib/plugs/jquery/jquery.min.js"></script>-->
 <!--<script src="./lib/plugs/jquery-ui-1.12.1.custom/jquery-ui.js"></script>-->
