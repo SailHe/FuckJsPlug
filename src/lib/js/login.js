@@ -12,7 +12,8 @@ $(() => {
  * @date 2018/9/10 20:39
  */
 const PATTERN_PASSWORD = /^[\w_-]{6,16}$/;
-const PATTERN_EMAILADDRESS = /^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$/;
+const PATTERN_EMAIL_ADDRESS = /^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$/;
+let isValid = true;
 
 $('input[name=loginInButton]').on('click', () => {
     $.messageBox("欢迎回来!");
@@ -41,6 +42,7 @@ $('form').on('onkeyup', function () {
         invalid: 'fa fa-remove',
         validating: 'fa fa-refresh'
     }
+    isValid = true;
     const fields = {
         username: {
             //可以有多个验证信息
@@ -144,16 +146,18 @@ $('form').on('onkeyup', function () {
                         validSuccess = validator['regexp'].test(this.value);
                         break;
                     case 'emailAddress' :
-                        validSuccess = PATTERN_EMAILADDRESS.test(this.value);
+                        validSuccess = PATTERN_EMAIL_ADDRESS.test(this.value);
                         break;
                     default :
                         "";
                         break;
                 }
+                isValid = isValid &&validSuccess;
                 if (!validSuccess) {
                     $.messageBox(`${validator['message']}`);
                 }
             }
         }
     }
+    $.messageBox(`验证${isValid ? "成功" : "失败"}`);
 });
