@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <style>
+        body {
+            background-color: #99974d;
+        }
+
+        .animation-element {
+
+        }
+
+        /*
+        创建动画的原理是，将一套 CSS 样式逐渐变化为另一套样式;
+        @keyframes 规则，能够创建动画
+        关键词 "from" 和 "to"，等价于 0%(动画的开始时间) 和 100%。
+        应该始终定义 0% 和 100% 选择器
+        */
+        .animation-hello-world {
+            /*-webkit-animation: 动画时间 延迟时间 动画名称 运动状态 次数 播放前重置*/
+            -webkit-animation: 2s 1s keyframe-1 linear infinite alternate;
+            /*除了 animation-play-state: 播放状态(running播放和paused暂停) 都可以写进去*/
+            /*
+            animation-timing-function 使用名为三次贝塞尔（Cubic Bezier）函数的数学函数，来生成速度曲线
+            运动状态(速度曲线): http://www.w3school.com.cn/tiy/c.asp?f=css_animation-timing-function&p=2
+            */
+        }
+
+        @keyframes keyframe-1 {
+            0% {
+                background-color: red;
+            }
+            to {
+                background-color: white;
+            }
+        }
+    </style>
+    <style>
+        @-webkit-keyframes move {
+            0% {
+                width: 100px;
+            }
+            100% {
+                width: 500px;
+            }
+        }
+
+        @-moz-keyframes move {
+            0% {
+                width: 100px;
+            }
+            100% {
+                width: 500px;
+            }
+        }
+
+        @keyframes move {
+            0% {
+                width: 100px;
+            }
+            100% {
+                width: 500px;
+            }
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        .move {
+            /*-webkit-animation: 2s move;
+            -moz-animation: 2s move;*/
+            animation: 2s move;
+            width: 500px;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+<div class="animation-element">
+    容器层0
+</div>
+</body>
+
+<script src="../src/lib/plugs/suit/jquery.js"></script>
+
+<script>
+    let count = 0;
+    $('.animation-element').on('click', function () {
+        $(this).addClass('animation-hello-world');
+    });
+
+
+    document.getElementById('box').onclick = function () {
+        this.className = 'box move';
+        addEnd(this, fn);
+    }
+    function fn() {
+        console.log("无限重复就不会结束233");
+    }
+    function addEnd(obj, fn) {
+        obj.addEventListener('webkitAnimationEnd', fn, false);
+        obj.addEventListener('animationend', fn, false);
+    }
+</script>
+
+</html>

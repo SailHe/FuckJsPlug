@@ -3,74 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>位置1</title>
-    <style>
-        body{
-            background-color: #99974d;
-        }
-        .box1{
-            height:100px;
-            background-color: snow;
-        }
-        .box2{
-            height:100px;
-            background-color: green;
-            position: relative;
-            left: 50px;
-            top: 50px;
-        }
-        .box3{
-            height:100px;
-            background-color: blue;
-        }
-        .box4{
-            height:100px;
-            background-color: cyan;
-        }
-        .box5{
-            text-align: center;
-            height:100px;
-            opacity: 0.95;
-            background-color: red;
-            /*
-            元素会脱离文档流，如果设置偏移量，会影响其他元素的位置定位
-            说明：元素在没有定义宽度的情况下，宽度由元素里面的内容决定，效果和用float方法一样。
-            act: 若5 挪到4上面 那么5的高度会被忽略
-            */
-            position: absolute;
-            /*
-            absolute定位原理剖析：
-            1.在父元素没有设置 相对定位 或 绝对定位 的情况下，元素相对于根元素定位（即html元素）（是父元素没有）。
-            2.父元素设置了相对定位或绝对定位，元素会相对于离自己最近的设置了相对或绝对定位的父元素进行定位
-             （或者说离自己最近的不是static的父元素进行定位，因为元素默认是 static）。
-             如果定义了absolute但没有定义top的话与没有定义absolute行为一致
-             act: 试着去掉 位置坐标(left, top)
-             */
-            left: 50px;
-            top: 0px;
-        }
-        .container0{
-            background-color: #b197cc;
-        }
-        .container1{
-            height:500px;
-            background-color: yellow;
-            position: absolute;
-        }
-        .container2{
-            height:200px;
-            background-color: #00b4F5;
-            position: relative;
-            top: -5px;
-        }
-        .container3{
-            height:200px;
-            position: relative;
-            top: 25px;
-        }
-    </style>
+    <link rel="stylesheet" href="../src/lib/css/ood.css">
 </head>
 <body>
-<div class="container0">
+<div class="ab-container">
     容器层0 static(默认); 我是body内的第一个div 这是我的宽度 然后外面棕色的是body
     <div class="container1">
         容器层1 absolute h500; 如果我没有颜色会继承了body的颜色, height是整个容器的高度, 但如果height过小也会被撑起来, 内部的元素具有同样的宽度, 我下边空白离c2有-5px(FuckC2把我遮住了)
@@ -78,7 +14,7 @@
             容器层2 relative(0, -5) h200; 我下边空白离c3有25px 我+c1=15+45=60px(may be 一字体高度=20px)
             <div class="container3">
                 233333333333-------------3333333333333333333333333 容器层3 relative(0, 25) h200 被box们遮住了,由于位于c2高度范围内,"继承"c2的颜色,b5的参考系, 撑起了整个容器的宽度 h:c1+c2+c3=100px
-                <div class="box1">box1 h100-</div>
+                <div class="normal-box">box1 h100-</div>
                 <div class="box2">box2 h100-- relative(50, 50) 相对于原来位置移动，元素设置此属性之后仍然处在文档流中，不影响其他元素的布局</div>
                 <div class="box3">box3 h100---</div>
                 <div class="box4">box4 h100----</div>

@@ -23,19 +23,20 @@ $('input[name=loginInButton]').on('click', () => {
 
 $('input[name=loginUpButton]').on('click', () => {
     $.messageBox("登录成功!");
-    $.messageBox("你的生日: ", 'alert');
+    $.messageBox("你的生日: ", 'alert_');
     let birthday = $('input[name=idCard]').val().substring(6, 6 + 8);
     $.messageBox(
         birthday.substring(0, 4) + "年"
         + birthday.substring(4, 4 + 2) + "月"
         + birthday.substring(4 + 2) + "日"
-        , 'alert'
+        , 'alert_'
     );
 });
 
+//blur
 $('form').on('onkeyup', function () {
 
-}).find(':input').on('blur', function () {
+}).find(':input').on('input', function () {
     //$.messageBox(`触发${$(this).prev('label').text()}验证!`);
     const feedbackIcons = {
         valid: 'fa fa-ok',
