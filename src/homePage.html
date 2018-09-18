@@ -52,12 +52,9 @@
 <div style="height: 500px">
     <div class="step-1 main-animation"></div>
 </div>
-<div class="step-2">
-    抖动了吗
+<div class="step-3">
+    <div class="dialog-box animation-once step-2">Hello I'm SailHe, a programmer</div>
 </div>
-<!--<div class="dialog-box-container">
-    <div class="dialog-box">Hello I'm SailHe, a programmer</div>
-</div>-->
 
 <div class="dynamic-border flex-container" href="./login.html">
     <div class="border-inner-contents center-sail-he flex-container">我是div版</div>
@@ -78,6 +75,9 @@
         console.log('我结束了');
         $('.step-2').addClass('animated bounce').on('animationend', function () {
             console.log('抖动完毕');
+            $('.step-3').addClass('dialog-box-container').on('animationend', function () {
+                console.log('播报完毕');
+            });
         });
     });
 </script>
