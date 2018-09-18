@@ -55,11 +55,16 @@ body.back-color {
 }
 
 /*弹性容器*/
+/*https://www.htmllion.com/css-flexbox.html*/
 .flex-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    background-color: snow;
+    /*background-color: snow;*/
     /*flex-direction: column;*/
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .cavern-gate{

@@ -19,8 +19,8 @@
         应该始终定义 0% 和 100% 选择器
         */
         .animation-hello-world {
-            /*-webkit-animation: 动画时间 延迟时间 动画名称 运动状态 次数 播放前重置*/
-            -webkit-animation: 2s 1s keyframe-1 linear infinite alternate;
+            /*-webkit-animation: 动画时间 延迟时间 动画名称 运动状态 次数(无限infinite) 播放前重置*/
+            -webkit-animation: 2s 1s keyframe-1 linear 1 alternate;
             /*除了 animation-play-state: 播放状态(running播放和paused暂停) 都可以写进去*/
             /*
             animation-timing-function 使用名为三次贝塞尔（Cubic Bezier）函数的数学函数，来生成速度曲线
@@ -95,7 +95,9 @@
 <script>
     let count = 0;
     $('.animation-element').on('click', function () {
-        $(this).addClass('animation-hello-world');
+        $(this).addClass('animation-hello-world').on('animationend', function () {
+            console.log("我结束了");
+        });
     });
 
 
