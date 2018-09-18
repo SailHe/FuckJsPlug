@@ -31,6 +31,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            /*position: relative;*/
             /*background-color: #004831;*/
             background: rgba(112, 234, 239, 0.13);
             color: rgba(54, 120, 121, .67);
@@ -42,27 +43,28 @@
     <link rel="stylesheet" href="./lib/css/animate.css">
 </head>
 <body>
-
+<!--<css-doodle style="position: absolute;">
+</css-doodle>-->
 <div class="center-sail-he flex-center">
     <img src="./lib/img/SailHe-Header.png" class="circle-sail-he">
 </div>
 
 <!--<div class="cavern-gate"></div>-->
-<div class="imaginary-line"></div>
-<div style="height: 500px">
+<!--<div class="imaginary-line"></div>-->
+<div style="height: 300px">
     <div class="step-1 main-animation"></div>
 </div>
 <div class="step-3">
     <div class="dialog-box animation-once step-2">Hello I'm SailHe, a programmer</div>
 </div>
-
+<!--
 <div class="dynamic-border flex-container" href="./login.html">
     <div class="border-inner-contents center-sail-he flex-container">我是div版</div>
 </div>
 
 <a class="dynamic-border flex-container" href="./login.html">
     <span class="border-inner-contents">333333333333333333333333333</span>
-</a>
+</a>-->
 <!--设置 div 元素的不透明级别：style="opacity: 1;"-->
 <!--
  CSS中的container通常是 一个隐藏div, 加上背景色后, 会有一个蒙层效果
@@ -82,47 +84,8 @@
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.2.3/css-doodle.min.js"></script>
-<!--<css-doodle>
-    :doodle {
-    @grid: 8 / 20rem 20rem;
-    @shape: circle;
-    background: var(&#45;&#45;bg3);
-    max-width: 90%;
-    }
-
-    @keyframes turn {
-    0% {
-    transform: rotate(0deg);
-    }
-    100% {
-    transform: rotate(360deg);
-    }
-    }
-
-    @keyframes glow {
-    50% {
-    transform: scale(1.1);
-    }
-    100% {
-    transform: scale(1);
-    }
-    }
-
-    @random {
-    animation: glow .9s ease-out infinite;
-    }
-
-    :hover {
-    animation: turn .9s ease-out infinite;
-    }
-
-    @shape: @pick('triangle', 'clover 4', 'hexagon', 'diamond', 'heart');
-    background: @pick('coral', 'orange', 'pink', 'blueviolet', 'darkslateblue');
-    margin: .5rem;
-    opacity: calc(@rand(1, 10) / 10);
-</css-doodle>
-&lt;!&ndash;https://www.timothyellison.com/2018/05/27/bokeh-backgrounds-with-css-doodle/&ndash;&gt;
-&lt;!&ndash;<css-doodle class="doodle" grid="12">
+<!--https://www.timothyellison.com/2018/05/27/bokeh-backgrounds-with-css-doodle/-->
+<!--<css-doodle class="doodle" grid="12">
     :doodle {
     @grid: 12 / 100vmax;
     background: #0a0c27;
@@ -149,50 +112,5 @@
     transform:
     scale(@rand(.2, 1.2))
     translate(@rand(-50%, 50%), @rand(-50%, 50%));
-</css-doodle>&ndash;&gt;
-<css-doodle>
-    :doodle {
-    @grid: 18 / 100vmax;
-    background: #0a0c27;
-    }
-    &#45;&#45;hue: calc(180 + 1.5 * @row() * @col());
-    background: hsl(var(&#45;&#45;hue), 50%, 70%);
-    margin: -.5px;
-    transition: @r(.5s) ease;
-    clip-path: polygon(@pick(
-    '0 0, 100% 0, 100% 100%',
-    '0 0, 100% 0, 0 100%',
-    '0 0, 100% 100%, 0 100%',
-    '100% 0, 100% 100%, 0 100%'
-    ));
-</css-doodle>
-<css-doodle>
-    :doodle {
-    @grid: 20 / 100vmax;
-    background: #0a0c27;
-    font-family: sans-serif;
-    }
-    :after {
-    content: \@hex(@rand(0x2500, 0x257f));
-    color: hsla(@r(360), 70%, 70%, @r(.9));
-    font-size: 5vmax;
-    }
-</css-doodle>
-<css-doodle>
-    :doodle {
-    @grid: 8 / 90%;
-    @shape: circle;
-    }
-    ​
-    transition: .2s @r(.6s);
-    border-radius: @pick(100% 0, 0 100%);
-    ​
-    will-change: transform;
-    transform: scale(@r(.25, 1.25));
-    ​
-    background: hsla(
-    calc(240 - 6 * @row() * @col()),
-    70%, 68%, @r(.8)
-    );
 </css-doodle>-->
 </html>
