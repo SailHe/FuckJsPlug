@@ -113,7 +113,12 @@ var str = JSON.stringify(jsonData);
  *
  * <!--   type="hidden"  disabled(不提交), readonly(只读, 提交到服务器)  .attr('disabled', 'disabled'); style="display:none;"
  * readonly只针对input(text / password)和textarea有效，而disabled对于所有的表单元素都有效，包括select, radio, checkbox, button等。
+ * readonly与disabled同时存在时 该元素的状态是disabled, 移除disabled后状态为readonly
+ * PS: css可以被继承, 但这两个是DOM属性不会被继承
+ * 对于String置为null后端接收到的是""而不是null, 将其置为disabled状态, 不会被提交到服务器, 后端接收的是null
+ *
  * post时name不同会直接忽略 name相同时会匹配赋值给DTO, 值如果不存在或是为null(即value="""")会自增 如果存在则[完全替换]-->
+ *
  *
  * closest() 方法获得匹配选择器的第一个祖先元素，从当前元素开始沿 DOM 树向上。
  *
@@ -349,13 +354,13 @@ $('#informationModal').modal({
 post时name不同会直接忽略 name相同时会匹配赋值给DTO, 值如果不存在或是为null(即value="""")会自增 如果存在则[完全替换]-->
 
 
-    /*java*/
+/*java*/
 /**
-*   正则表达式
-*   Matcher matcher = PATTERN_NUMBER.matcher(dtRequestDTO.getSearch());
+ *   正则表达式
+ *   Matcher matcher = PATTERN_NUMBER.matcher(dtRequestDTO.getSearch());
  *
-*   boolean numberSearchForCategoryId = matcher.matches();
-*   前端无法传一个jsonList(如果只有一个属性的话是可以的 list是用逗号分隔的 同一个json的不同属性间也是用逗号分隔的)到后端 因此需要在后端再做处理 同时顺便处理了可以处理的东西 避免了http请求的传参
+ *   boolean numberSearchForCategoryId = matcher.matches();
+ *   前端无法传一个jsonList(如果只有一个属性的话是可以的 list是用逗号分隔的 同一个json的不同属性间也是用逗号分隔的)到后端 因此需要在后端再做处理 同时顺便处理了可以处理的东西 避免了http请求的传参
  *
  *   若前端传入的参数由多个同名的name 序列化后不会报错 传参时貌似是以第一个为准的
  *   若后端的参数列表有多个同名的参数 那么会匹配同一个参数名 拥有同一个参数值
@@ -366,4 +371,25 @@ post时name不同会直接忽略 name相同时会匹配赋值给DTO, 值如果�
  *    DTO可以由后端向前端传出 前端可以读取, 但反过来一个包装类型没法从前端传向后端
  *    如果要传一个一对多的关系 只能将包转类中的需要的属性拆成List<BaseType>才能进行前后端交互
  *    JSON字符串 '{"first":0,"second":1,"third":2}'   (容易弄混的是属性的引号必须是双引号)
-* */
+ * */
+
+
+function f1(
+    //同时直接定义Json形参和json对象形参时 貌似传不进来
+    {
+        par1=""
+    },
+    jsonObjParam = {
+        par2: "即使只定义了jsonObjParam 没有传参时, 这不是它的默认值"
+    }
+) {
+    //do something else
+}
+
+/**
+ *
+ * 联动中定义current, next; 或者 past, current 都有一定的歧义:
+ * 当前触发点击的定义为current, 但请求返回处理数据时实际上却是处理的next的, 有点反直觉
+ * 定义为past更加反直觉: 因为这事实上就是当前点击的, 而不是上一个联动点的
+ * 可以定义为trigger和linker, 这就避免了先后之分的命名带来的额歧义
+ * */
