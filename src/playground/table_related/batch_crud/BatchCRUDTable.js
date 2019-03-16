@@ -1,3 +1,6 @@
+// 建立（Create）、读取（Read）、更新（Update）、删除（Delete），也就是 CRUD；
+// 这是一连串常见的动作行为，而其行为通常是为了针对某个特定资源所作出的举动（例如：建立资料、读取资料等）。
+
 //大中小类型的缓存(所有的DTO 的 Json数组)  {big: new Array(), middle: new Array(), small: new Array()}
 var categoryGradeBuffer = new Array(new Array(), new Array(), new Array());
 

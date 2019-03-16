@@ -1,3 +1,6 @@
+// unity: 统一 联合 个体
+// utility: 效用
+
 /**
  * Descriptions: 属性原型定义<p>
  * @param volume, taste || jsonString || {volume, taste}
