@@ -4,7 +4,7 @@
     {
       "stationId": 20091,
       "pastureId": 10101,
-      "stationName": "下城区奶站",
+      "stationName": "城区奶站",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -23,7 +23,7 @@
     {
       "stationId": 20092,
       "pastureId": 10101,
-      "stationName": "临海市奶站",
+      "stationName": "海市奶站",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -42,7 +42,7 @@
     {
       "stationId": 20093,
       "pastureId": 10101,
-      "stationName": "理工站",
+      "stationName": "理站",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -61,7 +61,7 @@
     {
       "stationId": 20105,
       "pastureId": 10101,
-      "stationName": "河坊",
+      "stationName": "坊",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -80,7 +80,7 @@
     {
       "stationId": 20113,
       "pastureId": 10101,
-      "stationName": "湖州华丰",
+      "stationName": "州丰",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -99,7 +99,7 @@
     {
       "stationId": 20114,
       "pastureId": 10101,
-      "stationName": "和睦",
+      "stationName": "和",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -175,7 +175,7 @@
     {
       "stationId": 20123,
       "pastureId": 10101,
-      "stationName": "留下高原",
+      "stationName": "留下",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -327,7 +327,7 @@
     {
       "stationId": 20144,
       "pastureId": 10101,
-      "stationName": "武康",
+      "stationName": "武",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -384,7 +384,7 @@
     {
       "stationId": 20160,
       "pastureId": 10101,
-      "stationName": "临安方良科",
+      "stationName": "临科",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -422,7 +422,7 @@
     {
       "stationId": 20174,
       "pastureId": 10101,
-      "stationName": "乔司",
+      "stationName": "v司",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -441,7 +441,7 @@
     {
       "stationId": 20175,
       "pastureId": 10101,
-      "stationName": "闲林",
+      "stationName": "闲v",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -460,7 +460,7 @@
     {
       "stationId": 20187,
       "pastureId": 10101,
-      "stationName": "良渚",
+      "stationName": "v渚",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -517,7 +517,7 @@
     {
       "stationId": 20197,
       "pastureId": 10101,
-      "stationName": "真的很ojbk",
+      "stationName": "很ok",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -536,7 +536,7 @@
     {
       "stationId": 20198,
       "pastureId": 10101,
-      "stationName": "真的很ojbk",
+      "stationName": "真的很",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -555,7 +555,7 @@
     {
       "stationId": 20199,
       "pastureId": 10101,
-      "stationName": "niayh",
+      "stationName": "Nav__",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
@@ -579,7 +579,7 @@
       "stationManagerPhone": "0571-96037",
       "stationIsJoin": 1,
       "streetId": 24,
-      "stationAddress": "杭州市上城区钱江路58号赞成太和广场8号楼6楼606-607室",
+      "stationAddress": "杭州市xxx",
       "stationLng": 30.0,
       "stationLat": 30.0,
       "stationCreateTime": -2209017600000,
@@ -631,7 +631,7 @@
     {
       "stationId": 20203,
       "pastureId": 10102,
-      "stationName": "123",
+      "stationName": "321",
       "stationManagerName": "test",
       "stationManagerPhone": "test",
       "stationIsJoin": null,
