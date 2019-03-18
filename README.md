@@ -5,4 +5,4 @@
 [AsyncLinkBufferChangeFactory](https://github.com/SailHe/JavaScript-Add-on/blob/caf38f0718a2dfd38fb93759ff2ee08e1c5f88f6/src/lib/js/utility.js#L846)
 
 ## [组件](https://github.com/SailHe/JavaScript-Add-on/tree/master/src/playground)
-### [批量增删改](https://github.com/SailHe/JavaScript-Add-on/blob/master/src/playground/table_related/batch_crud/BatchCRUDTable.html)
+### [批量增删改](https://sailhe.herokuapp.com/JavaScript-Add-on/playground/table_related/batch_crud/BatchCRUDTable.html)
