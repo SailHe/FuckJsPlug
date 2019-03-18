@@ -7,7 +7,7 @@
 ## [组件](https://github.com/SailHe/JavaScript-Add-on/tree/master/src/playground)
 1. 批量增删改表格
    [Source](https://github.com/SailHe/JavaScript-Add-on/blob/master/src/playground/table_related/batch_crud)
-   [Demo](https://sailhe.herokuapp.com/JavaScript-Add-on/playground/table_related/batch_crud/BatchCRUDTable.html){:target="_blank"}
+   <a href="https://sailhe.herokuapp.com/JavaScript-Add-on/playground/table_related/batch_crud/BatchCRUDTable.html" target="_blank">Demo</a>
    
     **Features**
       - 纯前端实现
