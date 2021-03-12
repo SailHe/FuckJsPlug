@@ -132,7 +132,7 @@ $("#stationInfoModal").on('hidden.bs.modal', function () {
 // 请求所有奶站 并缓存 PS: FireFox中貌似不允许这种请求(单开一个页面直接请求这个这个json文件是可以的) 另外需要注意清理缓存
 function listStationRequest() {
     $.ajax({
-        type: 'post',
+        type: 'get',
         dataType: 'json',
         async: false,
         // 这个url事实上是相对于调用者来说的(即引入此js的页面)
